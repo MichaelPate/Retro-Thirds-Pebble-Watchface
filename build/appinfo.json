@@ -1,0 +1,32 @@
+{
+    "displayName": "Retro-Thirds-Pebble-Watchface",
+    "uuid": "b6d801c7-83d0-47d3-bff1-b5c7fa907559",
+    "sdkVersion": "3",
+    "enableMultiJS": true,
+    "targetPlatforms": [
+        "aplite",
+        "basalt",
+        "chalk",
+        "diorite",
+        "emery",
+        "flint"
+    ],
+    "watchapp": {
+        "watchface": true
+    },
+    "messageKeys": {
+        "dummy": 10000
+    },
+    "resources": {
+        "media": []
+    },
+    "name": "Retro-Thirds-Pebble-Watchface",
+    "shortName": "Retro-Thirds-Pebble-Watchface",
+    "longName": "Retro-Thirds-Pebble-Watchface",
+    "versionLabel": "1.0",
+    "companyName": "MakeAwesomeHappen",
+    "appKeys": {
+        "dummy": 10000
+    },
+    "capabilities": []
+}
