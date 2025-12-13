@@ -8,11 +8,13 @@ static TextLayer *sWeatherTextLayer, *sTemperatureTextLayer, *sTodayTemperatureT
 static TextLayer *sTimeTextLayer;
 static TextLayer *sDayTextLayer, *sDateTextLayer, *sBattBTTextLayer;
 
+static GFont sTimeFont, sTextFont;
+
 // Our background color layers
 static Layer *sBgTopLayer, *sBgBottomLayer; // no background for middle layer since time text just uses its BG color
 #define top_y 54//PBL_IF_ROUND_ELSE(58, 52); // Need to go back
 //const int middle_size = PBL_IF_ROUND_ELSE(58, 52);
-#define bottom_y top_y + 54 // which y level will the layers be defined at
+#define bottom_y top_y + 58 // which y level will the layers be defined at
 static GColor bgTopColor, bgMiddleColor, bgBottomColor;
 static GColor weatherTextColor, timeTextColor, dateTextColor;
 
@@ -51,6 +53,9 @@ static void main_window_load(Window *window)
   Layer *window_layer = window_get_root_layer(window);
   GRect windowBounds = layer_get_bounds(window_layer);
 
+  // Initialize fonts
+  sTimeFont = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_ABDUCTION_48));
+
   // Create the time TextLayer with specific bounds (in its third of the screen) and colors
   sTimeTextLayer = text_layer_create(
       GRect(0, top_y, windowBounds.size.w, bottom_y - top_y));
@@ -58,8 +63,9 @@ static void main_window_load(Window *window)
   timeTextColor = GColorBlack;
   text_layer_set_background_color(sTimeTextLayer, bgMiddleColor);
   text_layer_set_text_color(sTimeTextLayer, timeTextColor);
-  text_layer_set_text(sTimeTextLayer, "00:00");
-  text_layer_set_font(sTimeTextLayer, fonts_get_system_font(FONT_KEY_BITHAM_42_BOLD));
+  //text_layer_set_text(sTimeTextLayer, "00:00"); // Time text is set by updateTime, called by tick handler
+  text_layer_set_font(sTimeTextLayer, sTimeFont);
+  //text_layer_set_font(sTimeTextLayer, fonts_get_system_font(FONT_KEY_BITHAM_42_BOLD));
   text_layer_set_text_alignment(sTimeTextLayer, GTextAlignmentCenter);
   layer_add_child(window_layer, text_layer_get_layer(sTimeTextLayer));
 
@@ -74,7 +80,7 @@ static void main_window_load(Window *window)
   layer_set_update_proc(sBgBottomLayer, bottomThirdBgColor_proc);
   layer_add_child(window_layer, sBgBottomLayer);
 
-  
+  // now we can setup our weather and date text layers
 }
 
 // When the main window unloads
@@ -84,6 +90,9 @@ static void main_window_unload(Window *window)
   text_layer_destroy(sTimeTextLayer);
   layer_destroy(sBgTopLayer);
   layer_destroy(sBgBottomLayer);
+
+  // Destroy other assets
+  fonts_unload_custom_font(sTimeFont);
 }
 
 // Tick handler called whenever the time changes

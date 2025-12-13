@@ -18,7 +18,14 @@
         "dummy": 10000
     },
     "resources": {
-        "media": []
+        "media": [
+            {
+                "type": "font",
+                "name": "ABDUCTION_48",
+                "file": "fonts/Abduction2002.ttf",
+                "compatibility": "2.7"
+            }
+        ]
     },
     "name": "Retro-Thirds-Pebble-Watchface",
     "shortName": "Retro-Thirds-Pebble-Watchface",

@@ -25,7 +25,15 @@
       "dummy"
     ],
     "resources": {
-      "media": []
+      "media": [
+        {
+          "type": "font",
+          "name": "ABDUCTION_48",
+          "file": "fonts/Abduction2002.ttf",
+          "compatibility":"2.7"
+        }
+
+      ]
     }
   }
 }
