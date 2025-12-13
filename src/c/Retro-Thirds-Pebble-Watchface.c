@@ -55,32 +55,70 @@ static void main_window_load(Window *window)
 
   // Initialize fonts
   sTimeFont = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_ABDUCTION_48));
+  sTextFont = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_PERFECT_DOS_18));
+
+  // Create our background color layers and add them as well
+  sBgTopLayer = layer_create(GRect(0, 0, windowBounds.size.w, top_y));
+  //bgTopColor = GColorVeryLightBlue;
+  bgTopColor = GColorVeryLightBlue;
+  layer_set_update_proc(sBgTopLayer, topThirdBgColor_proc);
+  layer_add_child(window_layer, sBgTopLayer);
+
+  sBgBottomLayer = layer_create(GRect(0, bottom_y, windowBounds.size.w, windowBounds.size.h));
+  bgBottomColor = GColorRoseVale;
+  layer_set_update_proc(sBgBottomLayer, bottomThirdBgColor_proc);
+  layer_add_child(window_layer, sBgBottomLayer);
 
   // Create the time TextLayer with specific bounds (in its third of the screen) and colors
   sTimeTextLayer = text_layer_create(
       GRect(0, top_y, windowBounds.size.w, bottom_y - top_y));
-  bgMiddleColor = GColorGreen;
+  bgMiddleColor = GColorMintGreen;
   timeTextColor = GColorBlack;
   text_layer_set_background_color(sTimeTextLayer, bgMiddleColor);
   text_layer_set_text_color(sTimeTextLayer, timeTextColor);
   //text_layer_set_text(sTimeTextLayer, "00:00"); // Time text is set by updateTime, called by tick handler
   text_layer_set_font(sTimeTextLayer, sTimeFont);
-  //text_layer_set_font(sTimeTextLayer, fonts_get_system_font(FONT_KEY_BITHAM_42_BOLD));
   text_layer_set_text_alignment(sTimeTextLayer, GTextAlignmentCenter);
   layer_add_child(window_layer, text_layer_get_layer(sTimeTextLayer));
 
-  // Create our background color layers and add them as well
-  sBgTopLayer = layer_create(GRect(0, 0, windowBounds.size.w, top_y));
-  bgTopColor = GColorBlue;
-  layer_set_update_proc(sBgTopLayer, topThirdBgColor_proc);
-  layer_add_child(window_layer, sBgTopLayer);
-
-  sBgBottomLayer = layer_create(GRect(0, bottom_y, windowBounds.size.w, windowBounds.size.h));
-  bgBottomColor = GColorRed;
-  layer_set_update_proc(sBgBottomLayer, bottomThirdBgColor_proc);
-  layer_add_child(window_layer, sBgBottomLayer);
-
   // now we can setup our weather and date text layers
+  sWeatherTextLayer = text_layer_create(
+    GRect(0, 2, windowBounds.size.w, top_y/2));
+  weatherTextColor = GColorBlack;
+  text_layer_set_background_color(sWeatherTextLayer, GColorClear);
+  text_layer_set_text_color(sWeatherTextLayer, weatherTextColor);
+  text_layer_set_text(sWeatherTextLayer, "Clear, Sunny");
+  text_layer_set_font(sWeatherTextLayer, sTextFont);
+  text_layer_set_text_alignment(sWeatherTextLayer, GTextAlignmentCenter);
+  layer_add_child(window_layer, text_layer_get_layer(sWeatherTextLayer));
+
+  sTemperatureTextLayer = text_layer_create(
+    GRect(0, (top_y/2) - 2, windowBounds.size.w, top_y/2));
+  text_layer_set_background_color(sTemperatureTextLayer, GColorClear);
+  text_layer_set_text_color(sTemperatureTextLayer, weatherTextColor);
+  text_layer_set_text(sTemperatureTextLayer, "34 F 19/54");
+  text_layer_set_font(sTemperatureTextLayer, sTextFont);
+  text_layer_set_text_alignment(sTemperatureTextLayer, GTextAlignmentCenter);
+  layer_add_child(window_layer, text_layer_get_layer(sTemperatureTextLayer));
+
+  sDayTextLayer = text_layer_create(
+    GRect(0, bottom_y+4, windowBounds.size.w, bottom_y/2));
+  dateTextColor = GColorBlack;
+  text_layer_set_background_color(sDayTextLayer, GColorClear);
+  text_layer_set_text_color(sDayTextLayer, dateTextColor);
+  text_layer_set_text(sDayTextLayer, "Sat.  12/13");
+  text_layer_set_font(sDayTextLayer, sTextFont);
+  text_layer_set_text_alignment(sDayTextLayer, GTextAlignmentCenter);
+  layer_add_child(window_layer, text_layer_get_layer(sDayTextLayer));
+
+  sDateTextLayer = text_layer_create(
+    GRect(0, (bottom_y) + (windowBounds.size.h - (bottom_y)) / 2, windowBounds.size.w, bottom_y/2));
+  text_layer_set_background_color(sDateTextLayer, GColorClear);
+  text_layer_set_text_color(sDateTextLayer, dateTextColor);
+  text_layer_set_text(sDateTextLayer, "Batt.100%");// NoBT");
+  text_layer_set_font(sDateTextLayer, sTextFont);
+  text_layer_set_text_alignment(sDateTextLayer, GTextAlignmentCenter);
+  layer_add_child(window_layer, text_layer_get_layer(sDateTextLayer));
 }
 
 // When the main window unloads
@@ -90,9 +128,15 @@ static void main_window_unload(Window *window)
   text_layer_destroy(sTimeTextLayer);
   layer_destroy(sBgTopLayer);
   layer_destroy(sBgBottomLayer);
+  
+  text_layer_destroy(sWeatherTextLayer);
+  text_layer_destroy(sTemperatureTextLayer);
+  text_layer_destroy(sDayTextLayer);
+  text_layer_destroy(sDateTextLayer);
 
   // Destroy other assets
   fonts_unload_custom_font(sTimeFont);
+  fonts_unload_custom_font(sTextFont);
 }
 
 // Tick handler called whenever the time changes

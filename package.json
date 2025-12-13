@@ -31,8 +31,19 @@
           "name": "ABDUCTION_48",
           "file": "fonts/Abduction2002.ttf",
           "compatibility":"2.7"
-        }
-
+        },
+        {
+          "type": "font",
+          "name": "DOTMATRIBOLD_24",
+          "file": "fonts/DOTMBold.ttf",
+          "compatibility":"2.7"
+        },
+        {
+          "type": "font",
+          "name": "PERFECT_DOS_18",
+          "file": "fonts/perfect-dos-vga.ttf",
+          "compatibility":"2.7"
+        }   
       ]
     }
   }
