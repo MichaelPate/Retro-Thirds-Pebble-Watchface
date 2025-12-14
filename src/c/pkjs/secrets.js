@@ -1,0 +1,1 @@
+export const OWM_KEY = "your_real_key_here";
