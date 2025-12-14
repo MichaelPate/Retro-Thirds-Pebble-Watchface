@@ -139,31 +139,66 @@
 	
 	    // Temperature in Kelvin requires adjustment
 	    var temperature = Math.round(json.main.temp - 273.15);
+	    var tempMin = Math.round(json.main.temp_min - 273.15);
+	    var tempMax = Math.round(json.main.temp_max - 273.15);
 	    console.log('Temperature is ' + temperature);
 	
 	    // Conditions
 	    var conditions = json.weather[0].main;
+	    var conditionsDesc = json.weather[0].description;
 	    console.log('Conditions are ' + conditions);
+	
+	    // Assemble dictionary using our keys
+	    var dictionary = {
+	      'TEMPERATURE': temperature,
+	      'TEMPERATUREMIN': tempMin,
+	      'TEMPERATUREMAX': tempMax,
+	      'CONDITIONS': conditions,
+	      'CONDITIONSDESC': conditionsDesc
+	    };
+	
+	    // Send to Pebble
+	    Pebble.sendAppMessage(dictionary, function(e) {
+	      console.log('Weather info sent to Pebble successfully!');
+	    }, function(e) {
+	      console.log('Error sending weather info to Pebble!');
+	    });
 	  });
 	}
+	
 	
 	function locationError(err) {
 	  console.log('Error requesting location!');
 	}
 	
 	function getWeather() {
-	  navigator.geolocation.getCurrentPosition(
-	    locationSuccess,
-	    locationError,
-	    {timeout: 15000, maximumAge: 60000} // units are seconds
-	  );
+	  if ("geolocation" in navigator)
+	  {
+	    navigator.geolocation.getCurrentPosition(
+	      locationSuccess,
+	      locationError,
+	      {timeout: 15000, maximumAge: 60000} // units are seconds
+	    );
+	  }
+	  else
+	  {
+	    console.log("Geolocation is not supported by this browser.");
+	  }
 	}
 	
 	// Listen for when the watchface is opened
 	Pebble.addEventListener('ready', function(e) {
-	  console.log('PebbleKit JS ready!');
+	  console.log('I say PebbleKit JS ready!');
 	
 	  // Get the initial weather
+	  getWeather();
+	});
+	
+	// Listen for when an AppMessage is received
+	Pebble.addEventListener('appmessage', function(e) {
+	  console.log('I saw AppMessage received!');
+	
+	  // Get updated weather now
 	  getWeather();
 	});
 

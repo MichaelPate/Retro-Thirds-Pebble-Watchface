@@ -11,11 +11,18 @@
         "emery",
         "flint"
     ],
+    "capabilities": [
+        "location"
+    ],
     "watchapp": {
         "watchface": true
     },
     "messageKeys": {
-        "dummy": 10000
+        "TEMPERATURE": 10000,
+        "TEMPERATUREMAX": 10001,
+        "TEMPERATUREMIN": 10002,
+        "CONDITIONS": 10003,
+        "CONDITIONSDESC": 10004
     },
     "resources": {
         "media": [
@@ -45,7 +52,10 @@
     "versionLabel": "1.0",
     "companyName": "MakeAwesomeHappen",
     "appKeys": {
-        "dummy": 10000
-    },
-    "capabilities": []
+        "TEMPERATURE": 10000,
+        "TEMPERATUREMAX": 10001,
+        "TEMPERATUREMIN": 10002,
+        "CONDITIONS": 10003,
+        "CONDITIONSDESC": 10004
+    }
 }

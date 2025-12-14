@@ -112,7 +112,7 @@ static void main_window_load(Window *window)
   weatherTextColor = GColorBlack;
   text_layer_set_background_color(sWeatherTextLayer, GColorClear);
   text_layer_set_text_color(sWeatherTextLayer, weatherTextColor);
-  text_layer_set_text(sWeatherTextLayer, "Weather");
+  //text_layer_set_text(sWeatherTextLayer, "Weather");
   text_layer_set_font(sWeatherTextLayer, sTextFont);
   text_layer_set_text_alignment(sWeatherTextLayer, GTextAlignmentCenter);
   layer_add_child(window_layer, text_layer_get_layer(sWeatherTextLayer));
@@ -169,6 +169,20 @@ static void tick_handler(struct tm *tick_time, TimeUnits units_changed)
 {
   // The primary purpose of the tick handler is to update the time
   updateTime();
+
+  // And now the weahter
+  // Get weather update every 30 minutes
+  if (tick_time->tm_min % 1 == 0) {
+    // Begin dictionary
+    DictionaryIterator *iter;
+    app_message_outbox_begin(&iter);
+
+    // Add a key-value pair
+    dict_write_uint8(iter, 0, 0);
+
+    // Send the message!
+    app_message_outbox_send();
+  }
 }
 
 static void battery_handler(BatteryChargeState state)
@@ -188,6 +202,28 @@ static void bt_handler(bool connected)
 
 static void inbox_received_callback(DictionaryIterator *iterator, void *context)
 {
+  static char temperatureBuffer[8], temperatureMinBuffer[8], temperatureMaxBuffer[8];
+  static char conditionsBuffer[32], conditionsDescBuffer[32];
+  static char weatherStringBuffer[32], temperatureStringBuffer[32]; // these strings will go into the text layers' texts
+
+  Tuple *temp_tuple = dict_find(iterator, MESSAGE_KEY_TEMPERATURE);
+  Tuple *tempMin_tuple = dict_find(iterator, MESSAGE_KEY_TEMPERATUREMIN);
+  Tuple *tempMax_tuple = dict_find(iterator, MESSAGE_KEY_TEMPERATUREMAX);
+  Tuple *conditions_tuple = dict_find(iterator, MESSAGE_KEY_CONDITIONS);
+  Tuple *conditionsDesc_tuple = dict_find(iterator, MESSAGE_KEY_CONDITIONSDESC);
+
+  snprintf(temperatureBuffer, sizeof(temperatureBuffer), "%dC", (int)temp_tuple->value->int32);
+  snprintf(conditionsBuffer, sizeof(conditionsBuffer), "%s", conditions_tuple->value->cstring);
+
+  // Assemble full string and display
+  snprintf(weatherStringBuffer, sizeof(weatherStringBuffer), "%s, %s", temperatureBuffer, conditionsBuffer);
+  text_layer_set_text(sWeatherTextLayer, weatherStringBuffer);
+
+  // If all data is available, use it
+  if (temp_tuple && conditions_tuple) {
+
+  }
+  APP_LOG(APP_LOG_LEVEL_INFO, "The weather should have updated!");
 
 }
 
@@ -205,7 +241,7 @@ static void outbox_sent_callback(DictionaryIterator *iterator, void *context)
 {
   // Fun fact, this APP_LOG method can be used to print to the console as long as 
   // the install command has "--logs" included
-  APP_LOG(APP_LOG_LEVEL_INFO, "Outbox send success!");
+  APP_LOG(APP_LOG_LEVEL_INFO, "My Outbox send success!");
 }
 
 // Face init code
@@ -236,16 +272,17 @@ static void init()
   bluetooth_connection_service_subscribe(bt_handler);
   bt_handler(bluetooth_connection_service_peek());
 
+
+  // Open AppMessage with some useful example buffer sizes
+  const int inbox_size = 512;
+  const int outbox_size = 128;
+  app_message_open(inbox_size, outbox_size);
+
   // Register callbacks to get weather data (and any other API online data)
   app_message_register_inbox_received(inbox_received_callback);
   app_message_register_inbox_dropped(inbox_dropped_callback);
   app_message_register_outbox_failed(outbox_failed_callback);
   app_message_register_outbox_sent(outbox_sent_callback);
-
-  // Open AppMessage with some useful example buffer sizes
-  const int inbox_size = 256;
-  const int outbox_size = 128;
-  app_message_open(inbox_size, outbox_size);
 }
 
 // Face de-init code
@@ -257,7 +294,7 @@ static void deinit()
   tick_timer_service_unsubscribe();
   battery_state_service_unsubscribe();
   bluetooth_connection_service_unsubscribe();
-  app_message_deregister_callbacks();
+  //app_message_deregister_callbacks();
 }
 
 int main(void)

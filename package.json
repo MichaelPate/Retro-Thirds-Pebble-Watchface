@@ -19,11 +19,16 @@
       "emery",
       "flint"
     ],
+    "capabilities": ["location"],
     "watchapp": {
       "watchface": true
     },
     "messageKeys": [
-      "dummy"
+      "TEMPERATURE",
+      "TEMPERATUREMAX",
+      "TEMPERATUREMIN",
+      "CONDITIONS",
+      "CONDITIONSDESC"
     ],
     "resources": {
       "media": [
