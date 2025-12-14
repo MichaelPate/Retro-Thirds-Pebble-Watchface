@@ -4,9 +4,9 @@
 static Window *sMainWindow;
 
 // Layer Objects, each line of text has its own layer
-static TextLayer *sWeatherTextLayer, *sTemperatureTextLayer, *sTodayTemperatureTextLayer;
+static TextLayer *sWeatherTextLayer, *sTemperatureTextLayer;
 static TextLayer *sTimeTextLayer;
-static TextLayer *sDayTextLayer, *sDateTextLayer, *sBattBTTextLayer;
+static TextLayer *sDayTextLayer, *sBattBtTextLayer;
 
 static GFont sTimeFont, sTextFont;
 
@@ -18,6 +18,9 @@ static Layer *sBgTopLayer, *sBgBottomLayer; // no background for middle layer si
 static GColor bgTopColor, bgMiddleColor, bgBottomColor;
 static GColor weatherTextColor, timeTextColor, dateTextColor;
 
+static int sBatteryLevel;
+static bool sBTConnected;
+
 // Required to set background color of the top and bottom thirds
 static void topThirdBgColor_proc(Layer *layer, GContext *ctx)
 {
@@ -28,6 +31,23 @@ static void bottomThirdBgColor_proc(Layer *layer, GContext *ctx)
 {
   graphics_context_set_fill_color(ctx, bgBottomColor);
   graphics_fill_rect(ctx, layer_get_bounds(layer), 0, GCornerNone);
+}
+
+static void updateBatteryAndBT()
+{
+  static char s_battery_buffer[16];
+
+  if (sBTConnected)
+  {
+    snprintf(s_battery_buffer, sizeof(s_battery_buffer), "Batt.%d%%", sBatteryLevel);
+  }
+  else
+  {
+    snprintf(s_battery_buffer, sizeof(s_battery_buffer), "Batt.%d%% NoBT", sBatteryLevel);
+  }
+  
+
+  text_layer_set_text(sBattBtTextLayer, s_battery_buffer);
 }
 
 // Normally this would go in the tick handler directly,
@@ -116,14 +136,14 @@ static void main_window_load(Window *window)
   text_layer_set_text_alignment(sDayTextLayer, GTextAlignmentCenter);
   layer_add_child(window_layer, text_layer_get_layer(sDayTextLayer));
 
-  sDateTextLayer = text_layer_create(
+  sBattBtTextLayer = text_layer_create(
     GRect(0, (bottom_y) + (windowBounds.size.h - (bottom_y)) / 2, windowBounds.size.w, bottom_y/2));
-  text_layer_set_background_color(sDateTextLayer, GColorClear);
-  text_layer_set_text_color(sDateTextLayer, dateTextColor);
-  text_layer_set_text(sDateTextLayer, "Batt.100%");// NoBT");
-  text_layer_set_font(sDateTextLayer, sTextFont);
-  text_layer_set_text_alignment(sDateTextLayer, GTextAlignmentCenter);
-  layer_add_child(window_layer, text_layer_get_layer(sDateTextLayer));
+  text_layer_set_background_color(sBattBtTextLayer, GColorClear);
+  text_layer_set_text_color(sBattBtTextLayer, dateTextColor);
+  text_layer_set_text(sBattBtTextLayer, "-");// NoBT");
+  text_layer_set_font(sBattBtTextLayer, sTextFont);
+  text_layer_set_text_alignment(sBattBtTextLayer, GTextAlignmentCenter);
+  layer_add_child(window_layer, text_layer_get_layer(sBattBtTextLayer));
 }
 
 // When the main window unloads
@@ -137,7 +157,7 @@ static void main_window_unload(Window *window)
   text_layer_destroy(sWeatherTextLayer);
   text_layer_destroy(sTemperatureTextLayer);
   text_layer_destroy(sDayTextLayer);
-  text_layer_destroy(sDateTextLayer);
+  text_layer_destroy(sBattBtTextLayer);
 
   // Destroy other assets
   fonts_unload_custom_font(sTimeFont);
@@ -150,6 +170,20 @@ static void tick_handler(struct tm *tick_time, TimeUnits units_changed)
   // The primary purpose of the tick handler is to update the time
   updateTime();
 }
+
+static void battery_handler(BatteryChargeState state)
+{
+  sBatteryLevel = state.charge_percent;
+  // Update meter
+  updateBatteryAndBT();
+}
+
+static void bt_handler(bool connected)
+{
+  sBTConnected = connected;
+  updateBatteryAndBT();
+}
+
 
 // Face init code
 static void init()
@@ -171,6 +205,14 @@ static void init()
 
   // Update the time now so we dont have to wait for the timer service
   updateTime();
+
+  // Register with the battery charge service so we know the state of the battery
+  battery_state_service_subscribe(battery_handler);
+  // Ensure battery level is displayed from the start
+  battery_handler(battery_state_service_peek());
+
+  bluetooth_connection_service_subscribe(bt_handler);
+  bt_handler(bluetooth_connection_service_peek());
 }
 
 // Face de-init code
@@ -178,6 +220,10 @@ static void deinit()
 {
   // Destroy the main window on deinit
   window_destroy(sMainWindow);
+
+  tick_timer_service_unsubscribe();
+  battery_state_service_unsubscribe();
+  bluetooth_connection_service_unsubscribe();
 }
 
 int main(void)
