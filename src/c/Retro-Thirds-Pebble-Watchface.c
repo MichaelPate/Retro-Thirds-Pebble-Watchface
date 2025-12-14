@@ -101,7 +101,7 @@ static void main_window_load(Window *window)
   timeTextColor = GColorBlack;
   text_layer_set_background_color(sTimeTextLayer, bgMiddleColor);
   text_layer_set_text_color(sTimeTextLayer, timeTextColor);
-  //text_layer_set_text(sTimeTextLayer, "00:00"); // Time text is set by updateTime, called by tick handler
+  text_layer_set_text(sTimeTextLayer, "00:00"); // Time text is set by updateTime, called by tick handler
   text_layer_set_font(sTimeTextLayer, sTimeFont);
   text_layer_set_text_alignment(sTimeTextLayer, GTextAlignmentCenter);
   layer_add_child(window_layer, text_layer_get_layer(sTimeTextLayer));
@@ -112,7 +112,7 @@ static void main_window_load(Window *window)
   weatherTextColor = GColorBlack;
   text_layer_set_background_color(sWeatherTextLayer, GColorClear);
   text_layer_set_text_color(sWeatherTextLayer, weatherTextColor);
-  text_layer_set_text(sWeatherTextLayer, "Clear, Sunny");
+  text_layer_set_text(sWeatherTextLayer, "Weather");
   text_layer_set_font(sWeatherTextLayer, sTextFont);
   text_layer_set_text_alignment(sWeatherTextLayer, GTextAlignmentCenter);
   layer_add_child(window_layer, text_layer_get_layer(sWeatherTextLayer));
@@ -121,7 +121,7 @@ static void main_window_load(Window *window)
     GRect(0, (top_y/2) - 2, windowBounds.size.w, top_y/2));
   text_layer_set_background_color(sTemperatureTextLayer, GColorClear);
   text_layer_set_text_color(sTemperatureTextLayer, weatherTextColor);
-  text_layer_set_text(sTemperatureTextLayer, "34 F 19/54");
+  text_layer_set_text(sTemperatureTextLayer, "Temperature");
   text_layer_set_font(sTemperatureTextLayer, sTextFont);
   text_layer_set_text_alignment(sTemperatureTextLayer, GTextAlignmentCenter);
   layer_add_child(window_layer, text_layer_get_layer(sTemperatureTextLayer));
@@ -131,7 +131,7 @@ static void main_window_load(Window *window)
   dateTextColor = GColorBlack;
   text_layer_set_background_color(sDayTextLayer, GColorClear);
   text_layer_set_text_color(sDayTextLayer, dateTextColor);
-  text_layer_set_text(sDayTextLayer, "Sat.  12/13");
+  text_layer_set_text(sDayTextLayer, "Date");
   text_layer_set_font(sDayTextLayer, sTextFont);
   text_layer_set_text_alignment(sDayTextLayer, GTextAlignmentCenter);
   layer_add_child(window_layer, text_layer_get_layer(sDayTextLayer));
@@ -140,7 +140,7 @@ static void main_window_load(Window *window)
     GRect(0, (bottom_y) + (windowBounds.size.h - (bottom_y)) / 2, windowBounds.size.w, bottom_y/2));
   text_layer_set_background_color(sBattBtTextLayer, GColorClear);
   text_layer_set_text_color(sBattBtTextLayer, dateTextColor);
-  text_layer_set_text(sBattBtTextLayer, "-");// NoBT");
+  text_layer_set_text(sBattBtTextLayer, "Battery");// NoBT");
   text_layer_set_font(sBattBtTextLayer, sTextFont);
   text_layer_set_text_alignment(sBattBtTextLayer, GTextAlignmentCenter);
   layer_add_child(window_layer, text_layer_get_layer(sBattBtTextLayer));

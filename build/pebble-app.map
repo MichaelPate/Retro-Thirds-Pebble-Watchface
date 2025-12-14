@@ -133,8 +133,6 @@ Discarded input sections
                 0x0000000000000000        0xc /home/michaelp/.pebble-sdk/SDKs/current/sdk-core/pebble/aplite/lib/libpebble.a(tmp7jpKUopebble.o)
  .text.bitmap_layer_set_compositing_mode
                 0x0000000000000000        0xc /home/michaelp/.pebble-sdk/SDKs/current/sdk-core/pebble/aplite/lib/libpebble.a(tmp7jpKUopebble.o)
- .text.bluetooth_connection_service_unsubscribe
-                0x0000000000000000        0xc /home/michaelp/.pebble-sdk/SDKs/current/sdk-core/pebble/aplite/lib/libpebble.a(tmp7jpKUopebble.o)
  .text.click_number_of_clicks_counted
                 0x0000000000000000        0xc /home/michaelp/.pebble-sdk/SDKs/current/sdk-core/pebble/aplite/lib/libpebble.a(tmp7jpKUopebble.o)
  .text.click_recognizer_get_button_id
@@ -1182,7 +1180,7 @@ LOAD /home/michaelp/.pebble-sdk/SDKs/4.9.77/toolchain/arm-none-eabi/bin/../lib/g
  .note.gnu.build-id
                 0x0000000000000084       0x24 linker stubs
 
-.text           0x00000000000000a8      0x80d
+.text           0x00000000000000a8      0x82e
  *(.text)
  .text          0x00000000000000a8       0x14 /home/michaelp/.pebble-sdk/SDKs/current/sdk-core/pebble/aplite/lib/libpebble.a(tmp7jpKUopebble.o)
  *(.text.*)
@@ -1199,212 +1197,215 @@ LOAD /home/michaelp/.pebble-sdk/SDKs/4.9.77/toolchain/arm-none-eabi/bin/../lib/g
  .text.main_window_unload
                 0x00000000000001c4       0x84 src/c/Retro-Thirds-Pebble-Watchface.c.49.o
  .text.main_window_load
-                0x0000000000000248      0x334 src/c/Retro-Thirds-Pebble-Watchface.c.49.o
+                0x0000000000000248      0x344 src/c/Retro-Thirds-Pebble-Watchface.c.49.o
  .text.bottomThirdBgColor_proc
-                0x000000000000057c       0x30 src/c/Retro-Thirds-Pebble-Watchface.c.49.o
+                0x000000000000058c       0x30 src/c/Retro-Thirds-Pebble-Watchface.c.49.o
  .text.topThirdBgColor_proc
-                0x00000000000005ac       0x30 src/c/Retro-Thirds-Pebble-Watchface.c.49.o
+                0x00000000000005bc       0x30 src/c/Retro-Thirds-Pebble-Watchface.c.49.o
  .text.startup.main
-                0x00000000000005dc       0xc8 src/c/Retro-Thirds-Pebble-Watchface.c.49.o
-                0x00000000000005dc                main
+                0x00000000000005ec       0xcc src/c/Retro-Thirds-Pebble-Watchface.c.49.o
+                0x00000000000005ec                main
  .text.app_event_loop
-                0x00000000000006a4        0xc /home/michaelp/.pebble-sdk/SDKs/current/sdk-core/pebble/aplite/lib/libpebble.a(tmp7jpKUopebble.o)
-                0x00000000000006a4                app_event_loop
+                0x00000000000006b8        0xc /home/michaelp/.pebble-sdk/SDKs/current/sdk-core/pebble/aplite/lib/libpebble.a(tmp7jpKUopebble.o)
+                0x00000000000006b8                app_event_loop
  .text.battery_state_service_peek
-                0x00000000000006b0        0xc /home/michaelp/.pebble-sdk/SDKs/current/sdk-core/pebble/aplite/lib/libpebble.a(tmp7jpKUopebble.o)
-                0x00000000000006b0                battery_state_service_peek
+                0x00000000000006c4        0xc /home/michaelp/.pebble-sdk/SDKs/current/sdk-core/pebble/aplite/lib/libpebble.a(tmp7jpKUopebble.o)
+                0x00000000000006c4                battery_state_service_peek
  .text.battery_state_service_subscribe
-                0x00000000000006bc        0xc /home/michaelp/.pebble-sdk/SDKs/current/sdk-core/pebble/aplite/lib/libpebble.a(tmp7jpKUopebble.o)
-                0x00000000000006bc                battery_state_service_subscribe
+                0x00000000000006d0        0xc /home/michaelp/.pebble-sdk/SDKs/current/sdk-core/pebble/aplite/lib/libpebble.a(tmp7jpKUopebble.o)
+                0x00000000000006d0                battery_state_service_subscribe
  .text.battery_state_service_unsubscribe
-                0x00000000000006c8        0xc /home/michaelp/.pebble-sdk/SDKs/current/sdk-core/pebble/aplite/lib/libpebble.a(tmp7jpKUopebble.o)
-                0x00000000000006c8                battery_state_service_unsubscribe
+                0x00000000000006dc        0xc /home/michaelp/.pebble-sdk/SDKs/current/sdk-core/pebble/aplite/lib/libpebble.a(tmp7jpKUopebble.o)
+                0x00000000000006dc                battery_state_service_unsubscribe
  .text.bluetooth_connection_service_peek
-                0x00000000000006d4        0xc /home/michaelp/.pebble-sdk/SDKs/current/sdk-core/pebble/aplite/lib/libpebble.a(tmp7jpKUopebble.o)
-                0x00000000000006d4                bluetooth_connection_service_peek
+                0x00000000000006e8        0xc /home/michaelp/.pebble-sdk/SDKs/current/sdk-core/pebble/aplite/lib/libpebble.a(tmp7jpKUopebble.o)
+                0x00000000000006e8                bluetooth_connection_service_peek
  .text.bluetooth_connection_service_subscribe
-                0x00000000000006e0        0xc /home/michaelp/.pebble-sdk/SDKs/current/sdk-core/pebble/aplite/lib/libpebble.a(tmp7jpKUopebble.o)
-                0x00000000000006e0                bluetooth_connection_service_subscribe
+                0x00000000000006f4        0xc /home/michaelp/.pebble-sdk/SDKs/current/sdk-core/pebble/aplite/lib/libpebble.a(tmp7jpKUopebble.o)
+                0x00000000000006f4                bluetooth_connection_service_subscribe
+ .text.bluetooth_connection_service_unsubscribe
+                0x0000000000000700        0xc /home/michaelp/.pebble-sdk/SDKs/current/sdk-core/pebble/aplite/lib/libpebble.a(tmp7jpKUopebble.o)
+                0x0000000000000700                bluetooth_connection_service_unsubscribe
  .text.clock_is_24h_style
-                0x00000000000006ec        0xc /home/michaelp/.pebble-sdk/SDKs/current/sdk-core/pebble/aplite/lib/libpebble.a(tmp7jpKUopebble.o)
-                0x00000000000006ec                clock_is_24h_style
+                0x000000000000070c        0xc /home/michaelp/.pebble-sdk/SDKs/current/sdk-core/pebble/aplite/lib/libpebble.a(tmp7jpKUopebble.o)
+                0x000000000000070c                clock_is_24h_style
  .text.fonts_load_custom_font
-                0x00000000000006f8        0xc /home/michaelp/.pebble-sdk/SDKs/current/sdk-core/pebble/aplite/lib/libpebble.a(tmp7jpKUopebble.o)
-                0x00000000000006f8                fonts_load_custom_font
+                0x0000000000000718        0xc /home/michaelp/.pebble-sdk/SDKs/current/sdk-core/pebble/aplite/lib/libpebble.a(tmp7jpKUopebble.o)
+                0x0000000000000718                fonts_load_custom_font
  .text.fonts_unload_custom_font
-                0x0000000000000704        0xc /home/michaelp/.pebble-sdk/SDKs/current/sdk-core/pebble/aplite/lib/libpebble.a(tmp7jpKUopebble.o)
-                0x0000000000000704                fonts_unload_custom_font
+                0x0000000000000724        0xc /home/michaelp/.pebble-sdk/SDKs/current/sdk-core/pebble/aplite/lib/libpebble.a(tmp7jpKUopebble.o)
+                0x0000000000000724                fonts_unload_custom_font
  .text.graphics_fill_rect
-                0x0000000000000710        0xc /home/michaelp/.pebble-sdk/SDKs/current/sdk-core/pebble/aplite/lib/libpebble.a(tmp7jpKUopebble.o)
-                0x0000000000000710                graphics_fill_rect
+                0x0000000000000730        0xc /home/michaelp/.pebble-sdk/SDKs/current/sdk-core/pebble/aplite/lib/libpebble.a(tmp7jpKUopebble.o)
+                0x0000000000000730                graphics_fill_rect
  .text.layer_add_child
-                0x000000000000071c        0xc /home/michaelp/.pebble-sdk/SDKs/current/sdk-core/pebble/aplite/lib/libpebble.a(tmp7jpKUopebble.o)
-                0x000000000000071c                layer_add_child
+                0x000000000000073c        0xc /home/michaelp/.pebble-sdk/SDKs/current/sdk-core/pebble/aplite/lib/libpebble.a(tmp7jpKUopebble.o)
+                0x000000000000073c                layer_add_child
  .text.layer_create
-                0x0000000000000728        0xc /home/michaelp/.pebble-sdk/SDKs/current/sdk-core/pebble/aplite/lib/libpebble.a(tmp7jpKUopebble.o)
-                0x0000000000000728                layer_create
+                0x0000000000000748        0xc /home/michaelp/.pebble-sdk/SDKs/current/sdk-core/pebble/aplite/lib/libpebble.a(tmp7jpKUopebble.o)
+                0x0000000000000748                layer_create
  .text.layer_destroy
-                0x0000000000000734        0xc /home/michaelp/.pebble-sdk/SDKs/current/sdk-core/pebble/aplite/lib/libpebble.a(tmp7jpKUopebble.o)
-                0x0000000000000734                layer_destroy
+                0x0000000000000754        0xc /home/michaelp/.pebble-sdk/SDKs/current/sdk-core/pebble/aplite/lib/libpebble.a(tmp7jpKUopebble.o)
+                0x0000000000000754                layer_destroy
  .text.layer_get_bounds
-                0x0000000000000740        0xc /home/michaelp/.pebble-sdk/SDKs/current/sdk-core/pebble/aplite/lib/libpebble.a(tmp7jpKUopebble.o)
-                0x0000000000000740                layer_get_bounds
+                0x0000000000000760        0xc /home/michaelp/.pebble-sdk/SDKs/current/sdk-core/pebble/aplite/lib/libpebble.a(tmp7jpKUopebble.o)
+                0x0000000000000760                layer_get_bounds
  .text.layer_set_update_proc
-                0x000000000000074c        0xc /home/michaelp/.pebble-sdk/SDKs/current/sdk-core/pebble/aplite/lib/libpebble.a(tmp7jpKUopebble.o)
-                0x000000000000074c                layer_set_update_proc
- .text.memset   0x0000000000000758        0xc /home/michaelp/.pebble-sdk/SDKs/current/sdk-core/pebble/aplite/lib/libpebble.a(tmp7jpKUopebble.o)
-                0x0000000000000758                memset
+                0x000000000000076c        0xc /home/michaelp/.pebble-sdk/SDKs/current/sdk-core/pebble/aplite/lib/libpebble.a(tmp7jpKUopebble.o)
+                0x000000000000076c                layer_set_update_proc
+ .text.memset   0x0000000000000778        0xc /home/michaelp/.pebble-sdk/SDKs/current/sdk-core/pebble/aplite/lib/libpebble.a(tmp7jpKUopebble.o)
+                0x0000000000000778                memset
  .text.resource_get_handle
-                0x0000000000000764        0xc /home/michaelp/.pebble-sdk/SDKs/current/sdk-core/pebble/aplite/lib/libpebble.a(tmp7jpKUopebble.o)
-                0x0000000000000764                resource_get_handle
+                0x0000000000000784        0xc /home/michaelp/.pebble-sdk/SDKs/current/sdk-core/pebble/aplite/lib/libpebble.a(tmp7jpKUopebble.o)
+                0x0000000000000784                resource_get_handle
  .text.snprintf
-                0x0000000000000770        0xc /home/michaelp/.pebble-sdk/SDKs/current/sdk-core/pebble/aplite/lib/libpebble.a(tmp7jpKUopebble.o)
-                0x0000000000000770                snprintf
+                0x0000000000000790        0xc /home/michaelp/.pebble-sdk/SDKs/current/sdk-core/pebble/aplite/lib/libpebble.a(tmp7jpKUopebble.o)
+                0x0000000000000790                snprintf
  .text.strftime
-                0x000000000000077c        0xc /home/michaelp/.pebble-sdk/SDKs/current/sdk-core/pebble/aplite/lib/libpebble.a(tmp7jpKUopebble.o)
-                0x000000000000077c                strftime
+                0x000000000000079c        0xc /home/michaelp/.pebble-sdk/SDKs/current/sdk-core/pebble/aplite/lib/libpebble.a(tmp7jpKUopebble.o)
+                0x000000000000079c                strftime
  .text.tick_timer_service_subscribe
-                0x0000000000000788        0xc /home/michaelp/.pebble-sdk/SDKs/current/sdk-core/pebble/aplite/lib/libpebble.a(tmp7jpKUopebble.o)
-                0x0000000000000788                tick_timer_service_subscribe
+                0x00000000000007a8        0xc /home/michaelp/.pebble-sdk/SDKs/current/sdk-core/pebble/aplite/lib/libpebble.a(tmp7jpKUopebble.o)
+                0x00000000000007a8                tick_timer_service_subscribe
  .text.tick_timer_service_unsubscribe
-                0x0000000000000794        0xc /home/michaelp/.pebble-sdk/SDKs/current/sdk-core/pebble/aplite/lib/libpebble.a(tmp7jpKUopebble.o)
-                0x0000000000000794                tick_timer_service_unsubscribe
+                0x00000000000007b4        0xc /home/michaelp/.pebble-sdk/SDKs/current/sdk-core/pebble/aplite/lib/libpebble.a(tmp7jpKUopebble.o)
+                0x00000000000007b4                tick_timer_service_unsubscribe
  .text.window_create
-                0x00000000000007a0        0xc /home/michaelp/.pebble-sdk/SDKs/current/sdk-core/pebble/aplite/lib/libpebble.a(tmp7jpKUopebble.o)
-                0x00000000000007a0                window_create
+                0x00000000000007c0        0xc /home/michaelp/.pebble-sdk/SDKs/current/sdk-core/pebble/aplite/lib/libpebble.a(tmp7jpKUopebble.o)
+                0x00000000000007c0                window_create
  .text.window_destroy
-                0x00000000000007ac        0xc /home/michaelp/.pebble-sdk/SDKs/current/sdk-core/pebble/aplite/lib/libpebble.a(tmp7jpKUopebble.o)
-                0x00000000000007ac                window_destroy
+                0x00000000000007cc        0xc /home/michaelp/.pebble-sdk/SDKs/current/sdk-core/pebble/aplite/lib/libpebble.a(tmp7jpKUopebble.o)
+                0x00000000000007cc                window_destroy
  .text.window_get_root_layer
-                0x00000000000007b8        0xc /home/michaelp/.pebble-sdk/SDKs/current/sdk-core/pebble/aplite/lib/libpebble.a(tmp7jpKUopebble.o)
-                0x00000000000007b8                window_get_root_layer
+                0x00000000000007d8        0xc /home/michaelp/.pebble-sdk/SDKs/current/sdk-core/pebble/aplite/lib/libpebble.a(tmp7jpKUopebble.o)
+                0x00000000000007d8                window_get_root_layer
  .text.window_set_window_handlers
-                0x00000000000007c4        0xc /home/michaelp/.pebble-sdk/SDKs/current/sdk-core/pebble/aplite/lib/libpebble.a(tmp7jpKUopebble.o)
-                0x00000000000007c4                window_set_window_handlers
+                0x00000000000007e4        0xc /home/michaelp/.pebble-sdk/SDKs/current/sdk-core/pebble/aplite/lib/libpebble.a(tmp7jpKUopebble.o)
+                0x00000000000007e4                window_set_window_handlers
  .text.window_stack_push
-                0x00000000000007d0        0xc /home/michaelp/.pebble-sdk/SDKs/current/sdk-core/pebble/aplite/lib/libpebble.a(tmp7jpKUopebble.o)
-                0x00000000000007d0                window_stack_push
+                0x00000000000007f0        0xc /home/michaelp/.pebble-sdk/SDKs/current/sdk-core/pebble/aplite/lib/libpebble.a(tmp7jpKUopebble.o)
+                0x00000000000007f0                window_stack_push
  .text.graphics_context_set_fill_color
-                0x00000000000007dc        0xc /home/michaelp/.pebble-sdk/SDKs/current/sdk-core/pebble/aplite/lib/libpebble.a(tmp7jpKUopebble.o)
-                0x00000000000007dc                graphics_context_set_fill_color
+                0x00000000000007fc        0xc /home/michaelp/.pebble-sdk/SDKs/current/sdk-core/pebble/aplite/lib/libpebble.a(tmp7jpKUopebble.o)
+                0x00000000000007fc                graphics_context_set_fill_color
  .text.localtime
-                0x00000000000007e8        0xc /home/michaelp/.pebble-sdk/SDKs/current/sdk-core/pebble/aplite/lib/libpebble.a(tmp7jpKUopebble.o)
-                0x00000000000007e8                localtime
+                0x0000000000000808        0xc /home/michaelp/.pebble-sdk/SDKs/current/sdk-core/pebble/aplite/lib/libpebble.a(tmp7jpKUopebble.o)
+                0x0000000000000808                localtime
  .text.text_layer_create
-                0x00000000000007f4        0xc /home/michaelp/.pebble-sdk/SDKs/current/sdk-core/pebble/aplite/lib/libpebble.a(tmp7jpKUopebble.o)
-                0x00000000000007f4                text_layer_create
+                0x0000000000000814        0xc /home/michaelp/.pebble-sdk/SDKs/current/sdk-core/pebble/aplite/lib/libpebble.a(tmp7jpKUopebble.o)
+                0x0000000000000814                text_layer_create
  .text.text_layer_destroy
-                0x0000000000000800        0xc /home/michaelp/.pebble-sdk/SDKs/current/sdk-core/pebble/aplite/lib/libpebble.a(tmp7jpKUopebble.o)
-                0x0000000000000800                text_layer_destroy
+                0x0000000000000820        0xc /home/michaelp/.pebble-sdk/SDKs/current/sdk-core/pebble/aplite/lib/libpebble.a(tmp7jpKUopebble.o)
+                0x0000000000000820                text_layer_destroy
  .text.text_layer_get_layer
-                0x000000000000080c        0xc /home/michaelp/.pebble-sdk/SDKs/current/sdk-core/pebble/aplite/lib/libpebble.a(tmp7jpKUopebble.o)
-                0x000000000000080c                text_layer_get_layer
+                0x000000000000082c        0xc /home/michaelp/.pebble-sdk/SDKs/current/sdk-core/pebble/aplite/lib/libpebble.a(tmp7jpKUopebble.o)
+                0x000000000000082c                text_layer_get_layer
  .text.text_layer_set_background_color
-                0x0000000000000818        0xc /home/michaelp/.pebble-sdk/SDKs/current/sdk-core/pebble/aplite/lib/libpebble.a(tmp7jpKUopebble.o)
-                0x0000000000000818                text_layer_set_background_color
+                0x0000000000000838        0xc /home/michaelp/.pebble-sdk/SDKs/current/sdk-core/pebble/aplite/lib/libpebble.a(tmp7jpKUopebble.o)
+                0x0000000000000838                text_layer_set_background_color
  .text.text_layer_set_font
-                0x0000000000000824        0xc /home/michaelp/.pebble-sdk/SDKs/current/sdk-core/pebble/aplite/lib/libpebble.a(tmp7jpKUopebble.o)
-                0x0000000000000824                text_layer_set_font
+                0x0000000000000844        0xc /home/michaelp/.pebble-sdk/SDKs/current/sdk-core/pebble/aplite/lib/libpebble.a(tmp7jpKUopebble.o)
+                0x0000000000000844                text_layer_set_font
  .text.text_layer_set_text
-                0x0000000000000830        0xc /home/michaelp/.pebble-sdk/SDKs/current/sdk-core/pebble/aplite/lib/libpebble.a(tmp7jpKUopebble.o)
-                0x0000000000000830                text_layer_set_text
+                0x0000000000000850        0xc /home/michaelp/.pebble-sdk/SDKs/current/sdk-core/pebble/aplite/lib/libpebble.a(tmp7jpKUopebble.o)
+                0x0000000000000850                text_layer_set_text
  .text.text_layer_set_text_alignment
-                0x000000000000083c        0xc /home/michaelp/.pebble-sdk/SDKs/current/sdk-core/pebble/aplite/lib/libpebble.a(tmp7jpKUopebble.o)
-                0x000000000000083c                text_layer_set_text_alignment
+                0x000000000000085c        0xc /home/michaelp/.pebble-sdk/SDKs/current/sdk-core/pebble/aplite/lib/libpebble.a(tmp7jpKUopebble.o)
+                0x000000000000085c                text_layer_set_text_alignment
  .text.text_layer_set_text_color
-                0x0000000000000848        0xc /home/michaelp/.pebble-sdk/SDKs/current/sdk-core/pebble/aplite/lib/libpebble.a(tmp7jpKUopebble.o)
-                0x0000000000000848                text_layer_set_text_color
- .text.time     0x0000000000000854        0xc /home/michaelp/.pebble-sdk/SDKs/current/sdk-core/pebble/aplite/lib/libpebble.a(tmp7jpKUopebble.o)
-                0x0000000000000854                time
+                0x0000000000000868        0xc /home/michaelp/.pebble-sdk/SDKs/current/sdk-core/pebble/aplite/lib/libpebble.a(tmp7jpKUopebble.o)
+                0x0000000000000868                text_layer_set_text_color
+ .text.time     0x0000000000000874        0xc /home/michaelp/.pebble-sdk/SDKs/current/sdk-core/pebble/aplite/lib/libpebble.a(tmp7jpKUopebble.o)
+                0x0000000000000874                time
  *(.rodata)
  *(.rodata*)
  .rodata.str1.1
-                0x0000000000000860       0x55 src/c/Retro-Thirds-Pebble-Watchface.c.49.o
+                0x0000000000000880       0x56 src/c/Retro-Thirds-Pebble-Watchface.c.49.o
 
-.glue_7         0x00000000000008b8        0x0
+.glue_7         0x00000000000008d8        0x0
  .glue_7        0x0000000000000000        0x0 linker stubs
 
-.glue_7t        0x00000000000008b8        0x0
+.glue_7t        0x00000000000008d8        0x0
  .glue_7t       0x0000000000000000        0x0 linker stubs
 
-.vfp11_veneer   0x00000000000008b8        0x0
+.vfp11_veneer   0x00000000000008d8        0x0
  .vfp11_veneer  0x0000000000000000        0x0 linker stubs
 
-.v4_bx          0x00000000000008b8        0x0
+.v4_bx          0x00000000000008d8        0x0
  .v4_bx         0x0000000000000000        0x0 linker stubs
 
-.iplt           0x00000000000008b8        0x0
+.iplt           0x00000000000008d8        0x0
  .iplt          0x0000000000000000        0x0 /home/michaelp/.pebble-sdk/SDKs/4.9.77/toolchain/arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.7.2/thumb2/crtbegin.o
 
-.rel.dyn        0x00000000000008b8        0x0
+.rel.dyn        0x00000000000008d8        0x0
  .rel.iplt      0x0000000000000000        0x0 /home/michaelp/.pebble-sdk/SDKs/4.9.77/toolchain/arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.7.2/thumb2/crtbegin.o
 
-.data           0x00000000000008b8        0x4
+.data           0x00000000000008d8        0x4
  *(.data)
- .data          0x00000000000008b8        0x0 /home/michaelp/.pebble-sdk/SDKs/4.9.77/toolchain/arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.7.2/thumb2/crti.o
- .data          0x00000000000008b8        0x4 /home/michaelp/.pebble-sdk/SDKs/4.9.77/toolchain/arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.7.2/thumb2/crtbegin.o
-                0x00000000000008b8                __dso_handle
- .data          0x00000000000008bc        0x0 src/c/Retro-Thirds-Pebble-Watchface.c.49.o
- .data          0x00000000000008bc        0x0 aplite/appinfo.auto.c.49.o
- .data          0x00000000000008bc        0x0 aplite/src/resource_ids.auto.c.49.o
- .data          0x00000000000008bc        0x0 src/message_keys.auto.c.49.o
- .data          0x00000000000008bc        0x0 /home/michaelp/.pebble-sdk/SDKs/current/sdk-core/pebble/aplite/lib/libpebble.a(tmp7jpKUopebble.o)
- .data          0x00000000000008bc        0x0 /home/michaelp/.pebble-sdk/SDKs/4.9.77/toolchain/arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.7.2/thumb2/crtend.o
- .data          0x00000000000008bc        0x0 /home/michaelp/.pebble-sdk/SDKs/4.9.77/toolchain/arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.7.2/thumb2/crtn.o
+ .data          0x00000000000008d8        0x0 /home/michaelp/.pebble-sdk/SDKs/4.9.77/toolchain/arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.7.2/thumb2/crti.o
+ .data          0x00000000000008d8        0x4 /home/michaelp/.pebble-sdk/SDKs/4.9.77/toolchain/arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.7.2/thumb2/crtbegin.o
+                0x00000000000008d8                __dso_handle
+ .data          0x00000000000008dc        0x0 src/c/Retro-Thirds-Pebble-Watchface.c.49.o
+ .data          0x00000000000008dc        0x0 aplite/appinfo.auto.c.49.o
+ .data          0x00000000000008dc        0x0 aplite/src/resource_ids.auto.c.49.o
+ .data          0x00000000000008dc        0x0 src/message_keys.auto.c.49.o
+ .data          0x00000000000008dc        0x0 /home/michaelp/.pebble-sdk/SDKs/current/sdk-core/pebble/aplite/lib/libpebble.a(tmp7jpKUopebble.o)
+ .data          0x00000000000008dc        0x0 /home/michaelp/.pebble-sdk/SDKs/4.9.77/toolchain/arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.7.2/thumb2/crtend.o
+ .data          0x00000000000008dc        0x0 /home/michaelp/.pebble-sdk/SDKs/4.9.77/toolchain/arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.7.2/thumb2/crtn.o
  *(.data.*)
 
-.igot.plt       0x00000000000008bc        0x0
+.igot.plt       0x00000000000008dc        0x0
  .igot.plt      0x0000000000000000        0x0 /home/michaelp/.pebble-sdk/SDKs/4.9.77/toolchain/arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.7.2/thumb2/crtbegin.o
 
-.bss            0x00000000000008bc       0x61
+.bss            0x00000000000008dc       0x61
  *(.bss)
  *(.bss.*)
  .bss.sDateBuffer.7504
-                0x00000000000008bc        0xc src/c/Retro-Thirds-Pebble-Watchface.c.49.o
+                0x00000000000008dc        0xc src/c/Retro-Thirds-Pebble-Watchface.c.49.o
  .bss.sWeatherTextLayer
-                0x00000000000008c8        0x4 src/c/Retro-Thirds-Pebble-Watchface.c.49.o
+                0x00000000000008e8        0x4 src/c/Retro-Thirds-Pebble-Watchface.c.49.o
  .bss.s_battery_buffer.7498
-                0x00000000000008cc       0x10 src/c/Retro-Thirds-Pebble-Watchface.c.49.o
+                0x00000000000008ec       0x10 src/c/Retro-Thirds-Pebble-Watchface.c.49.o
  .bss.sDayTextLayer
-                0x00000000000008dc        0x4 src/c/Retro-Thirds-Pebble-Watchface.c.49.o
- .bss.sTextFont
-                0x00000000000008e0        0x4 src/c/Retro-Thirds-Pebble-Watchface.c.49.o
- .bss.bgBottomColor
-                0x00000000000008e4        0x1 src/c/Retro-Thirds-Pebble-Watchface.c.49.o
- .bss.sTimeBuffer.7503
-                0x00000000000008e5        0x8 src/c/Retro-Thirds-Pebble-Watchface.c.49.o
- .bss.weatherTextColor
-                0x00000000000008ed        0x1 src/c/Retro-Thirds-Pebble-Watchface.c.49.o
- *fill*         0x00000000000008ee        0x2 
- .bss.sBgTopLayer
-                0x00000000000008f0        0x4 src/c/Retro-Thirds-Pebble-Watchface.c.49.o
- .bss.timeTextColor
-                0x00000000000008f4        0x1 src/c/Retro-Thirds-Pebble-Watchface.c.49.o
- *fill*         0x00000000000008f5        0x3 
- .bss.sBatteryLevel
-                0x00000000000008f8        0x4 src/c/Retro-Thirds-Pebble-Watchface.c.49.o
- .bss.sBattBtTextLayer
                 0x00000000000008fc        0x4 src/c/Retro-Thirds-Pebble-Watchface.c.49.o
- .bss.sBgBottomLayer
+ .bss.sTextFont
                 0x0000000000000900        0x4 src/c/Retro-Thirds-Pebble-Watchface.c.49.o
- .bss.sTimeTextLayer
-                0x0000000000000904        0x4 src/c/Retro-Thirds-Pebble-Watchface.c.49.o
- .bss.dateTextColor
-                0x0000000000000908        0x1 src/c/Retro-Thirds-Pebble-Watchface.c.49.o
- *fill*         0x0000000000000909        0x3 
- .bss.sTemperatureTextLayer
-                0x000000000000090c        0x4 src/c/Retro-Thirds-Pebble-Watchface.c.49.o
- .bss.sTimeFont
+ .bss.bgBottomColor
+                0x0000000000000904        0x1 src/c/Retro-Thirds-Pebble-Watchface.c.49.o
+ .bss.sTimeBuffer.7503
+                0x0000000000000905        0x8 src/c/Retro-Thirds-Pebble-Watchface.c.49.o
+ .bss.weatherTextColor
+                0x000000000000090d        0x1 src/c/Retro-Thirds-Pebble-Watchface.c.49.o
+ *fill*         0x000000000000090e        0x2 
+ .bss.sBgTopLayer
                 0x0000000000000910        0x4 src/c/Retro-Thirds-Pebble-Watchface.c.49.o
- .bss.bgMiddleColor
+ .bss.timeTextColor
                 0x0000000000000914        0x1 src/c/Retro-Thirds-Pebble-Watchface.c.49.o
- .bss.sBTConnected
-                0x0000000000000915        0x1 src/c/Retro-Thirds-Pebble-Watchface.c.49.o
- *fill*         0x0000000000000916        0x2 
- .bss.sMainWindow
+ *fill*         0x0000000000000915        0x3 
+ .bss.sBatteryLevel
                 0x0000000000000918        0x4 src/c/Retro-Thirds-Pebble-Watchface.c.49.o
+ .bss.sBattBtTextLayer
+                0x000000000000091c        0x4 src/c/Retro-Thirds-Pebble-Watchface.c.49.o
+ .bss.sBgBottomLayer
+                0x0000000000000920        0x4 src/c/Retro-Thirds-Pebble-Watchface.c.49.o
+ .bss.sTimeTextLayer
+                0x0000000000000924        0x4 src/c/Retro-Thirds-Pebble-Watchface.c.49.o
+ .bss.dateTextColor
+                0x0000000000000928        0x1 src/c/Retro-Thirds-Pebble-Watchface.c.49.o
+ *fill*         0x0000000000000929        0x3 
+ .bss.sTemperatureTextLayer
+                0x000000000000092c        0x4 src/c/Retro-Thirds-Pebble-Watchface.c.49.o
+ .bss.sTimeFont
+                0x0000000000000930        0x4 src/c/Retro-Thirds-Pebble-Watchface.c.49.o
+ .bss.bgMiddleColor
+                0x0000000000000934        0x1 src/c/Retro-Thirds-Pebble-Watchface.c.49.o
+ .bss.sBTConnected
+                0x0000000000000935        0x1 src/c/Retro-Thirds-Pebble-Watchface.c.49.o
+ *fill*         0x0000000000000936        0x2 
+ .bss.sMainWindow
+                0x0000000000000938        0x4 src/c/Retro-Thirds-Pebble-Watchface.c.49.o
  .bss.bgTopColor
-                0x000000000000091c        0x1 src/c/Retro-Thirds-Pebble-Watchface.c.49.o
+                0x000000000000093c        0x1 src/c/Retro-Thirds-Pebble-Watchface.c.49.o
 
 DISCARD
  libc.a(*)
@@ -1443,11 +1444,11 @@ OUTPUT(/mnt/Babel/Documents/Projects/Pebble/Retro-Thirds-Pebble-Watchface/build/
  .comment       0x0000000000000000       0x4f src/message_keys.auto.c.49.o
  .comment       0x0000000000000000       0x4f /home/michaelp/.pebble-sdk/SDKs/4.9.77/toolchain/arm-none-eabi/bin/../lib/gcc/arm-none-eabi/4.7.2/thumb2/crtend.o
 
-.debug_info     0x0000000000000000     0x1638
- .debug_info    0x0000000000000000     0x11f8 src/c/Retro-Thirds-Pebble-Watchface.c.49.o
- .debug_info    0x00000000000011f8      0x31a aplite/appinfo.auto.c.49.o
- .debug_info    0x0000000000001512       0xa5 aplite/src/resource_ids.auto.c.49.o
- .debug_info    0x00000000000015b7       0x81 src/message_keys.auto.c.49.o
+.debug_info     0x0000000000000000     0x1655
+ .debug_info    0x0000000000000000     0x1215 src/c/Retro-Thirds-Pebble-Watchface.c.49.o
+ .debug_info    0x0000000000001215      0x31a aplite/appinfo.auto.c.49.o
+ .debug_info    0x000000000000152f       0xa5 aplite/src/resource_ids.auto.c.49.o
+ .debug_info    0x00000000000015d4       0x81 src/message_keys.auto.c.49.o
 
 .debug_abbrev   0x0000000000000000      0x415
  .debug_abbrev  0x0000000000000000      0x2ef src/c/Retro-Thirds-Pebble-Watchface.c.49.o
@@ -1471,20 +1472,20 @@ OUTPUT(/mnt/Babel/Documents/Projects/Pebble/Retro-Thirds-Pebble-Watchface/build/
 .debug_ranges   0x0000000000000000       0x70
  .debug_ranges  0x0000000000000000       0x70 src/c/Retro-Thirds-Pebble-Watchface.c.49.o
 
-.debug_line     0x0000000000000000      0x67d
- .debug_line    0x0000000000000000      0x3c0 src/c/Retro-Thirds-Pebble-Watchface.c.49.o
- .debug_line    0x00000000000003c0      0x126 aplite/appinfo.auto.c.49.o
- .debug_line    0x00000000000004e6       0xcf aplite/src/resource_ids.auto.c.49.o
- .debug_line    0x00000000000005b5       0xc8 src/message_keys.auto.c.49.o
+.debug_line     0x0000000000000000      0x67f
+ .debug_line    0x0000000000000000      0x3c2 src/c/Retro-Thirds-Pebble-Watchface.c.49.o
+ .debug_line    0x00000000000003c2      0x126 aplite/appinfo.auto.c.49.o
+ .debug_line    0x00000000000004e8       0xcf aplite/src/resource_ids.auto.c.49.o
+ .debug_line    0x00000000000005b7       0xc8 src/message_keys.auto.c.49.o
 
-.debug_str      0x0000000000000000      0xb5e
- .debug_str     0x0000000000000000      0x88f src/c/Retro-Thirds-Pebble-Watchface.c.49.o
-                                        0x92a (size before relaxing)
- .debug_str     0x000000000000088f      0x236 aplite/appinfo.auto.c.49.o
+.debug_str      0x0000000000000000      0xb87
+ .debug_str     0x0000000000000000      0x8b8 src/c/Retro-Thirds-Pebble-Watchface.c.49.o
+                                        0x953 (size before relaxing)
+ .debug_str     0x00000000000008b8      0x236 aplite/appinfo.auto.c.49.o
                                         0x337 (size before relaxing)
- .debug_str     0x0000000000000ac5       0x6f aplite/src/resource_ids.auto.c.49.o
+ .debug_str     0x0000000000000aee       0x6f aplite/src/resource_ids.auto.c.49.o
                                         0x151 (size before relaxing)
- .debug_str     0x0000000000000b34       0x2a src/message_keys.auto.c.49.o
+ .debug_str     0x0000000000000b5d       0x2a src/message_keys.auto.c.49.o
                                         0x10c (size before relaxing)
 
 .debug_frame    0x0000000000000000      0x124
