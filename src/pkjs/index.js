@@ -23,7 +23,9 @@ var xhrRequest = function (url, type, callback) {
   xhr.send();
 };
 
-var myAPIKey = 'your own key here!';
+// API key stored in secrets file so its not shown on github
+const secrets = require("./secrets");
+const myAPIKey = secrets.OWM_KEY;
 
 function locationSuccess(pos) {
   // Construct URL
