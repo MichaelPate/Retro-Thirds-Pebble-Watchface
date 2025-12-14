@@ -184,7 +184,6 @@ static void bt_handler(bool connected)
   updateBatteryAndBT();
 }
 
-
 // Face init code
 static void init()
 {
