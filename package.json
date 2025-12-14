@@ -3,6 +3,7 @@
   "author": "MakeAwesomeHappen",
   "version": "1.0.0",
   "keywords": ["pebble-app"],
+  "capabilities": ["location"],
   "private": true,
   "dependencies": {},
   "pebble": {
