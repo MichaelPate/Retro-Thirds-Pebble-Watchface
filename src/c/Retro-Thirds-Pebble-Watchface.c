@@ -35,15 +35,20 @@ static void bottomThirdBgColor_proc(Layer *layer, GContext *ctx)
 static void updateTime()
 {
   // Get a tm structure
-  time_t temp = time(NULL);
-  struct tm *tick_time = localtime(&temp);
+  time_t tempTime = time(NULL);
+  struct tm *tick_time = localtime(&tempTime);
 
   // Write the current hours and minutes into a buffer
-  static char s_buffer[8];
-  strftime(s_buffer, sizeof(s_buffer), clock_is_24h_style() ? "%H:%M" : "%I:%M", tick_time);
+  static char sTimeBuffer[8];
+  strftime(sTimeBuffer, sizeof(sTimeBuffer), clock_is_24h_style() ? "%H:%M" : "%I:%M", tick_time);
 
   // Display this time on the TextLayer
-  text_layer_set_text(sTimeTextLayer, s_buffer);
+  text_layer_set_text(sTimeTextLayer, sTimeBuffer);
+
+  // Now the same steps but for the day ("Sun. 12/14" for Sunday, December 14)
+  static char sDateBuffer[12];
+  strftime(sDateBuffer, sizeof(sDateBuffer), "%a. %m/%d", tick_time);
+  text_layer_set_text(sDayTextLayer, sDateBuffer);
 }
 
 // When the main window first loads
