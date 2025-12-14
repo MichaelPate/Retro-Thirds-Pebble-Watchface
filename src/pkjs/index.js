@@ -25,6 +25,10 @@ var xhrRequest = function (url, type, callback) {
 
 // API key stored in secrets file so its not shown on github
 const secrets = require("./secrets");
+if (!secrets.OWM_KEY)
+{
+  console.log("Missing OpenWeatherMap API key");
+}
 const myAPIKey = secrets.OWM_KEY;
 
 function locationSuccess(pos) {
