@@ -214,12 +214,19 @@ static void inbox_received_callback(DictionaryIterator *iterator, void *context)
   Tuple *conditions_tuple = dict_find(iterator, MESSAGE_KEY_CONDITIONS);
   Tuple *conditionsDesc_tuple = dict_find(iterator, MESSAGE_KEY_CONDITIONSDESC);
 
-  snprintf(temperatureBuffer, sizeof(temperatureBuffer), "%dF", (int)temp_tuple->value->int32);
+  snprintf(temperatureBuffer, sizeof(temperatureBuffer), "%d", (int)temp_tuple->value->int32);
+  snprintf(temperatureMinBuffer, sizeof(temperatureMinBuffer), "%d", (int)tempMin_tuple->value->int32);
+  snprintf(temperatureMaxBuffer, sizeof(temperatureMaxBuffer), "%d", (int)tempMax_tuple->value->int32);
   snprintf(conditionsBuffer, sizeof(conditionsBuffer), "%s", conditions_tuple->value->cstring);
+  snprintf(conditionsDescBuffer, sizeof(conditionsDescBuffer), "%s", conditionsDesc_tuple->value->cstring);
 
   // Assemble full string and display
-  snprintf(weatherStringBuffer, sizeof(weatherStringBuffer), "%s, %s", temperatureBuffer, conditionsBuffer);
+  snprintf(weatherStringBuffer, sizeof(weatherStringBuffer), "%s", conditionsBuffer);
   text_layer_set_text(sWeatherTextLayer, weatherStringBuffer);
+
+  snprintf(temperatureStringBuffer, sizeof(temperatureStringBuffer), "%s F %s/%s", temperatureBuffer,
+    temperatureMinBuffer, temperatureMaxBuffer);
+  text_layer_set_text(sTemperatureTextLayer, temperatureStringBuffer);
 
   APP_LOG(APP_LOG_LEVEL_INFO, "The weather has updated!");
 
