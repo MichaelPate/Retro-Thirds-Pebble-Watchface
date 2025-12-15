@@ -214,7 +214,7 @@ static void inbox_received_callback(DictionaryIterator *iterator, void *context)
   Tuple *conditions_tuple = dict_find(iterator, MESSAGE_KEY_CONDITIONS);
   Tuple *conditionsDesc_tuple = dict_find(iterator, MESSAGE_KEY_CONDITIONSDESC);
 
-  snprintf(temperatureBuffer, sizeof(temperatureBuffer), "%dC", (int)temp_tuple->value->int32);
+  snprintf(temperatureBuffer, sizeof(temperatureBuffer), "%dF", (int)temp_tuple->value->int32);
   snprintf(conditionsBuffer, sizeof(conditionsBuffer), "%s", conditions_tuple->value->cstring);
 
   // Assemble full string and display

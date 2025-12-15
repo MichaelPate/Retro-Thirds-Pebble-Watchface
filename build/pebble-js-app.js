@@ -137,10 +137,10 @@
 	    // responseText contains a JSON object with weather info
 	    var json = JSON.parse(responseText);
 	
-	    // Temperature in Kelvin requires adjustment
-	    var temperature = Math.round(json.main.temp - 273.15);
-	    var tempMin = Math.round(json.main.temp_min - 273.15);
-	    var tempMax = Math.round(json.main.temp_max - 273.15);
+	    // Temperature in Kelvin requires adjustment to Fahrenehit
+	    var temperature = Math.round((json.main.temp - 273.15) * (9/5) + 32);
+	    var tempMin = Math.round((json.main.temp_min - 273.15) * (9/5) + 32);
+	    var tempMax = Math.round((json.main.temp_max - 273.15) * (9/5) + 32);
 	    //console.log('Temperature is ' + temperature);
 	
 	    // Conditions
