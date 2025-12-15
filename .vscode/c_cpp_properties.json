@@ -4,6 +4,7 @@
             "name": "Linux",
             "includePath": [
                 "${workspaceFolder}/**",
+                "/home/michaelp/.pebble-sdk/SDKs/4.9.77/sdk-core/pebble/basalt/include",
                 "${workspaceFolder}/build/basalt"
             ],
             "defines": [],
