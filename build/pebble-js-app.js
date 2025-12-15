@@ -107,7 +107,7 @@
 	  console.log('AppMessage received!');
 	});
 	*/
-	
+	console.log("Hello");
 	// This is where we build the XML Http request that we will send to OpenWeatherMap.org
 	// The API key is not included here, for that we put it in the URL
 	var xhrRequest = function (url, type, callback) {
@@ -206,7 +206,8 @@
 /* 3 */
 /***/ (function(module, exports) {
 
-	export const OWM_KEY = "3ffacd56700b1bae38173398a3287491";
+	//export const OWM_KEY = "3ffacd56700b1bae38173398a3287491";
+	module.exports = { OWM_KEY: "3ffacd56700b1bae38173398a3287491" }
 
 /***/ })
 /******/ ]);
