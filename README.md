@@ -2,9 +2,8 @@
 
 Update 12-14-2025: Functionality is essentially complete, call it version 1.0
 Colors are not configurable yet, neither is the OWM API key (without rebuilding the app from source anyway)
-Thats the next target, but the actual watchface itself is done.
+Thats the next target, but the actual watchface itself is done. The future plans are to add settings for the text colors, background colors, OWM API key, and weather update frequency
 <img width="604" height="662" alt="image" src="https://github.com/user-attachments/assets/59eec960-bddc-41cc-be0f-ee1dfb547690" />
-
 
 A simple watch face with some cool fonts I found that shows time, date, weather, battery percentage, and an indicator for no BT connection.
 It has colors split into thirds, by default in an RGB pattern. The colors of each third as well as each section of text can be changed.
