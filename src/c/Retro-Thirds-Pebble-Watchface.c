@@ -33,6 +33,8 @@ static void bottomThirdBgColor_proc(Layer *layer, GContext *ctx)
   graphics_fill_rect(ctx, layer_get_bounds(layer), 0, GCornerNone);
 }
 
+// The battery and BT update are in one method because they both go on the same
+// text layer, easier to just have one method that updates that text layer
 static void updateBatteryAndBT()
 {
   static char s_battery_buffer[16];
@@ -112,7 +114,7 @@ static void main_window_load(Window *window)
   weatherTextColor = GColorBlack;
   text_layer_set_background_color(sWeatherTextLayer, GColorClear);
   text_layer_set_text_color(sWeatherTextLayer, weatherTextColor);
-  //text_layer_set_text(sWeatherTextLayer, "Weather");
+  text_layer_set_text(sWeatherTextLayer, "Weather");
   text_layer_set_font(sWeatherTextLayer, sTextFont);
   text_layer_set_text_alignment(sWeatherTextLayer, GTextAlignmentCenter);
   layer_add_child(window_layer, text_layer_get_layer(sWeatherTextLayer));
@@ -219,11 +221,7 @@ static void inbox_received_callback(DictionaryIterator *iterator, void *context)
   snprintf(weatherStringBuffer, sizeof(weatherStringBuffer), "%s, %s", temperatureBuffer, conditionsBuffer);
   text_layer_set_text(sWeatherTextLayer, weatherStringBuffer);
 
-  // If all data is available, use it
-  if (temp_tuple && conditions_tuple) {
-
-  }
-  APP_LOG(APP_LOG_LEVEL_INFO, "The weather should have updated!");
+  APP_LOG(APP_LOG_LEVEL_INFO, "The weather has updated!");
 
 }
 
@@ -241,7 +239,7 @@ static void outbox_sent_callback(DictionaryIterator *iterator, void *context)
 {
   // Fun fact, this APP_LOG method can be used to print to the console as long as 
   // the install command has "--logs" included
-  APP_LOG(APP_LOG_LEVEL_INFO, "My Outbox send success!");
+  APP_LOG(APP_LOG_LEVEL_INFO, "Outbox send success!");
 }
 
 // Face init code
@@ -274,7 +272,7 @@ static void init()
 
 
   // Open AppMessage with some useful example buffer sizes
-  const int inbox_size = 512;
+  const int inbox_size = 128;
   const int outbox_size = 128;
   app_message_open(inbox_size, outbox_size);
 
@@ -294,7 +292,7 @@ static void deinit()
   tick_timer_service_unsubscribe();
   battery_state_service_unsubscribe();
   bluetooth_connection_service_unsubscribe();
-  //app_message_deregister_callbacks();
+  app_message_deregister_callbacks();
 }
 
 int main(void)

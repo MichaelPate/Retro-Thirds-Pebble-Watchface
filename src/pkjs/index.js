@@ -45,12 +45,12 @@ function locationSuccess(pos) {
     var temperature = Math.round(json.main.temp - 273.15);
     var tempMin = Math.round(json.main.temp_min - 273.15);
     var tempMax = Math.round(json.main.temp_max - 273.15);
-    console.log('Temperature is ' + temperature);
+    //console.log('Temperature is ' + temperature);
 
     // Conditions
     var conditions = json.weather[0].main;
     var conditionsDesc = json.weather[0].description;
-    console.log('Conditions are ' + conditions);
+    //console.log('Conditions are ' + conditions);
 
     // Assemble dictionary using our keys
     var dictionary = {
@@ -92,15 +92,18 @@ function getWeather() {
 
 // Listen for when the watchface is opened
 Pebble.addEventListener('ready', function(e) {
-  console.log('I say PebbleKit JS ready!');
+  console.log('PebbleKit JS ready!');
 
   // Get the initial weather
   getWeather();
 });
 
 // Listen for when an AppMessage is received
+// By just calling getWeather() we can just send an empty message
+// no need to parse its contents. If we need to do other function here
+// then we will need to change that logic
 Pebble.addEventListener('appmessage', function(e) {
-  console.log('I saw AppMessage received!');
+  console.log('AppMessage received!');
 
   // Get updated weather now
   getWeather();
