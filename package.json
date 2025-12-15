@@ -2,10 +2,16 @@
   "name": "Retro-Thirds-Pebble-Watchface",
   "author": "MakeAwesomeHappen",
   "version": "1.0.0",
-  "keywords": ["pebble-app"],
-  "capabilities": ["location"],
+  "keywords": [
+    "pebble-app"
+  ],
+  "capabilities": [
+    "location"
+  ],
   "private": true,
-  "dependencies": {},
+  "dependencies": {
+    "pebble-clay": "^1.0.4"
+  },
   "pebble": {
     "displayName": "Retro-Thirds-Pebble-Watchface",
     "uuid": "b6d801c7-83d0-47d3-bff1-b5c7fa907559",
@@ -19,11 +25,22 @@
       "emery",
       "flint"
     ],
-    "capabilities": ["location"],
+    "capabilities": [
+      "location",
+      "configurable"
+    ],
     "watchapp": {
       "watchface": true
     },
     "messageKeys": [
+      "topBackgroundColor",
+      "middleBackgroundColor",
+      "bottomBackgroundColor",
+      "weatherTextColor",
+      "timeTextColor",
+      "dateTextColor",
+      "weathermapAPIkey",
+      "weatherUpdateFrequencyMinutes",
       "TEMPERATURE",
       "TEMPERATUREMAX",
       "TEMPERATUREMIN",
@@ -36,20 +53,20 @@
           "type": "font",
           "name": "ABDUCTION_48",
           "file": "fonts/Abduction2002.ttf",
-          "compatibility":"2.7"
+          "compatibility": "2.7"
         },
         {
           "type": "font",
           "name": "DOTMATRIBOLD_24",
           "file": "fonts/DOTMBold.ttf",
-          "compatibility":"2.7"
+          "compatibility": "2.7"
         },
         {
           "type": "font",
           "name": "PERFECT_DOS_18",
           "file": "fonts/perfect-dos-vga.ttf",
-          "compatibility":"2.7"
-        }   
+          "compatibility": "2.7"
+        }
       ]
     }
   }
