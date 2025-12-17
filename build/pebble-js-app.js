@@ -141,42 +141,50 @@
 	var myAPIKey;
 	
 	function locationSuccess(pos) {
-	  // Construct URL
-	  var url = 'http://api.openweathermap.org/data/2.5/weather?lat=' +
-	      pos.coords.latitude + '&lon=' + pos.coords.longitude + '&appid=' + myAPIKey;
+	  try
+	  { 
+	    // Construct URL
+	    var url = 'http://api.openweathermap.org/data/2.5/weather?lat=' +
+	        pos.coords.latitude + '&lon=' + pos.coords.longitude + '&appid=' + myAPIKey;
 	
-	  // Send request to OpenWeatherMap
-	  xhrRequest(url, 'GET', function(responseText) {
-	    // responseText contains a JSON object with weather info
-	    var json = JSON.parse(responseText);
+	    // Send request to OpenWeatherMap
+	    xhrRequest(url, 'GET', function(responseText) {
+	      // responseText contains a JSON object with weather info
+	      var json = JSON.parse(responseText);
 	
-	    // Temperature in Kelvin requires adjustment to Fahrenehit
-	    var temperature = Math.round((json.main.temp - 273.15) * (9/5) + 32);
-	    var tempMin = Math.round((json.main.temp_min - 273.15) * (9/5) + 32);
-	    var tempMax = Math.round((json.main.temp_max - 273.15) * (9/5) + 32);
-	    //console.log('Temperature is ' + temperature);
+	      // Temperature in Kelvin requires adjustment to Fahrenehit
+	      var temperature = Math.round((json.main.temp - 273.15) * (9/5) + 32);
+	      var tempMin = Math.round((json.main.temp_min - 273.15) * (9/5) + 32);
+	      var tempMax = Math.round((json.main.temp_max - 273.15) * (9/5) + 32);
+	      //console.log('Temperature is ' + temperature);
 	
-	    // Conditions
-	    var conditions = json.weather[0].main;
-	    var conditionsDesc = json.weather[0].description;
-	    //console.log('Conditions are ' + conditions);
+	      // Conditions
+	      var conditions = json.weather[0].main;
+	      var conditionsDesc = json.weather[0].description;
+	      //console.log('Conditions are ' + conditions);
 	
-	    // Assemble dictionary using our keys
-	    var dictionary = {
-	      'TEMPERATURE': temperature,
-	      'TEMPERATUREMIN': tempMin,
-	      'TEMPERATUREMAX': tempMax,
-	      'CONDITIONS': conditions,
-	      'CONDITIONSDESC': conditionsDesc
-	    };
+	      // Assemble dictionary using our keys
+	      var dictionary = {
+	        'TEMPERATURE': temperature,
+	        'TEMPERATUREMIN': tempMin,
+	        'TEMPERATUREMAX': tempMax,
+	        'CONDITIONS': conditions,
+	        'CONDITIONSDESC': conditionsDesc
+	      };
 	
-	    // Send to Pebble
-	    Pebble.sendAppMessage(dictionary, function(e) {
-	      console.log('Weather info sent to Pebble successfully!');
-	    }, function(e) {
-	      console.log('Error sending weather info to Pebble!');
+	      // Send to Pebble
+	      Pebble.sendAppMessage(dictionary, function(e) {
+	        console.log('Weather info sent to Pebble successfully!');
+	      }, function(e) {
+	        console.log('Error sending weather info to Pebble!');
+	      });
 	    });
-	  });
+	
+	  } catch (err)
+	  {
+	    console.log('Failed to parse weather JSON, retrying in 1 min:', err);
+	    setTimeout(function() { locationSuccess(pos); }, RETRY_DELAY);
+	  }
 	}
 	
 	
