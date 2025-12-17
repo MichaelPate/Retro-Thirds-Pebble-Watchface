@@ -60,13 +60,13 @@ module.exports = [
             "defaultValue": "More Settings"
           },
           {
-            "type": "text",
+            "type": "input",
             "messageKey": "weathermapAPIkey",
             "label": "OWM API Key",
             "defaultValue": ""
           },
           {
-            "type": "text",
+            "type": "input",
             "messageKey": "weatherUpdateFrequencyMinutes",
             "label": "Update Frequency (minutes)",
             "defaultValue": "30"

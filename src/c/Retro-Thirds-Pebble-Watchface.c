@@ -34,7 +34,7 @@ typedef struct ClaySettings {
   GColor middleBackgroundColor;
   GColor bottomBackgroundColor;
   int weatherUpdateMinutes;
-  char owm_apiKey[32];
+  char owm_apiKey[33]; //the API key is 32 characters but we need the terminator in there too
 } ClaySettings;
 
 static ClaySettings sClaySettings;
@@ -48,7 +48,8 @@ static void prv_defaultSettings()
   sClaySettings.middleBackgroundColor = GColorMintGreen;
   sClaySettings.bottomBackgroundColor = GColorRoseVale;
   sClaySettings.weatherUpdateMinutes = 30;
-  strncpy(sClaySettings.owm_apiKey, "No API Key", sizeof(sClaySettings.owm_apiKey));
+  //strncpy(sClaySettings.owm_apiKey, "No API Key", sizeof(sClaySettings.owm_apiKey));
+  snprintf(sClaySettings.owm_apiKey, sizeof(sClaySettings.owm_apiKey), "%s", "No API key");
 }
 
 static void prv_loadSettings()
@@ -164,7 +165,7 @@ static void main_window_load(Window *window)
     GRect(0, 2, windowBounds.size.w, top_y/2));
   text_layer_set_background_color(sWeatherTextLayer, GColorClear);
   text_layer_set_text_color(sWeatherTextLayer, sClaySettings.weatherTextColor);
-  text_layer_set_text(sWeatherTextLayer, "Weather");
+  text_layer_set_text(sWeatherTextLayer, "Check API");
   text_layer_set_font(sWeatherTextLayer, sTextFont);
   text_layer_set_text_alignment(sWeatherTextLayer, GTextAlignmentCenter);
   layer_add_child(window_layer, text_layer_get_layer(sWeatherTextLayer));
@@ -173,7 +174,7 @@ static void main_window_load(Window *window)
     GRect(0, (top_y/2) - 2, windowBounds.size.w, top_y/2));
   text_layer_set_background_color(sTemperatureTextLayer, GColorClear);
   text_layer_set_text_color(sTemperatureTextLayer, sClaySettings.weatherTextColor);
-  text_layer_set_text(sTemperatureTextLayer, "Temperature");
+  text_layer_set_text(sTemperatureTextLayer, "Key!");
   text_layer_set_font(sTemperatureTextLayer, sTextFont);
   text_layer_set_text_alignment(sTemperatureTextLayer, GTextAlignmentCenter);
   layer_add_child(window_layer, text_layer_get_layer(sTemperatureTextLayer));
@@ -215,16 +216,8 @@ static void main_window_unload(Window *window)
   fonts_unload_custom_font(sTextFont);
 }
 
-// Tick handler called whenever the time changes
-static void tick_handler(struct tm *tick_time, TimeUnits units_changed)
+static void callForWeatherUpdate()
 {
-  // The primary purpose of the tick handler is to update the time
-  updateTime();
-
-  // And now the weahter
-  // Get weather update every 30 minutes
-  if (tick_time->tm_min % sClaySettings.weatherUpdateMinutes == 0) {
-    // Begin dictionary
     DictionaryIterator *iter;
     app_message_outbox_begin(&iter);
 
@@ -233,9 +226,23 @@ static void tick_handler(struct tm *tick_time, TimeUnits units_changed)
     // Instead of an empty dict we will include the API key, which came from Clay
     // which came from the app's settings page (no longer baked in)
     dict_write_cstring(iter, 1, sClaySettings.owm_apiKey);
+    //APP_LOG(APP_LOG_LEVEL_INFO, strcat("C: API KEY is ", sClaySettings.owm_apiKey));
 
     // Send the message!
     app_message_outbox_send();
+}
+
+// Tick handler called whenever the time changes
+static void tick_handler(struct tm *tick_time, TimeUnits units_changed)
+{
+  // The primary purpose of the tick handler is to update the time
+  updateTime();
+
+  // And now the weahter
+  if (tick_time->tm_min % sClaySettings.weatherUpdateMinutes == 0) {
+  //if (tick_time->tm_min % 1 == 0) {
+    APP_LOG(APP_LOG_LEVEL_INFO, "C: Im updating the weather! frequency: %d", sClaySettings.weatherUpdateMinutes);
+    callForWeatherUpdate();
   }
 }
 
@@ -255,7 +262,7 @@ static void bt_handler(bool connected)
 // The below callbacks are part of the AppMessage system (how we get weather data from API)
 static void inbox_received_callback(DictionaryIterator *iterator, void *context)
 {
-  APP_LOG(APP_LOG_LEVEL_INFO, "Appmessage received in C code!");
+  APP_LOG(APP_LOG_LEVEL_INFO, "C: Appmessage received in C code!");
 
   // Lets handle weather data first
   static char temperatureBuffer[8], temperatureMinBuffer[8], temperatureMaxBuffer[8];
@@ -302,7 +309,7 @@ static void inbox_received_callback(DictionaryIterator *iterator, void *context)
     temperatureMinBuffer, temperatureMaxBuffer);
   text_layer_set_text(sTemperatureTextLayer, temperatureStringBuffer);
 
-  APP_LOG(APP_LOG_LEVEL_INFO, "The weather has updated!");
+  APP_LOG(APP_LOG_LEVEL_INFO, "C: The weather has updated!");
 
 
   // Now lets handle the data from Clay
@@ -345,29 +352,42 @@ static void inbox_received_callback(DictionaryIterator *iterator, void *context)
   Tuple *tWeatherMinutes = dict_find(iterator, MESSAGE_KEY_weatherUpdateFrequencyMinutes);
   if (tWeatherMinutes)
   {
-    sClaySettings.weatherUpdateMinutes = (int)tWeatherMinutes->value->int32;
+    //sClaySettings.weatherUpdateMinutes = (int)tWeatherMinutes->value->int32;
+    sClaySettings.weatherUpdateMinutes = atoi(tWeatherMinutes->value->cstring);
+
+  }
+
+  Tuple *tWeatherApiKey = dict_find(iterator, MESSAGE_KEY_weathermapAPIkey);
+  if (tWeatherApiKey)
+  {
+    snprintf(sClaySettings.owm_apiKey, sizeof(sClaySettings.owm_apiKey), "%s", tWeatherApiKey->value->cstring);
+    //strncpy(sClaySettings.owm_apiKey, tWeatherApiKey->value->cstring, sizeof(sClaySettings.owm_apiKey));
+
+    // We changed the API key, lets update right now
+    APP_LOG(APP_LOG_LEVEL_INFO, "C: New OWM API key, updating now.");
+    callForWeatherUpdate();
   }
 
   prv_saveSettings();
 
-  APP_LOG(APP_LOG_LEVEL_INFO, "Clay settings have been saved.");
+  APP_LOG(APP_LOG_LEVEL_INFO, "C: Clay settings have been saved.");
 }
 
 static void inbox_dropped_callback(AppMessageResult reason, void *context)
 {
-  APP_LOG(APP_LOG_LEVEL_ERROR, "Message dropped!");
+  APP_LOG(APP_LOG_LEVEL_ERROR, "C: Message dropped!");
 }
 
 static void outbox_failed_callback(DictionaryIterator *iterator, AppMessageResult reason, void *context)
 {
-  APP_LOG(APP_LOG_LEVEL_ERROR, "Outbox send failed!");
+  APP_LOG(APP_LOG_LEVEL_ERROR, "C: Outbox send failed!");
 }
 
 static void outbox_sent_callback(DictionaryIterator *iterator, void *context)
 {
   // Fun fact, this APP_LOG method can be used to print to the console as long as 
   // the install command has "--logs" included
-  APP_LOG(APP_LOG_LEVEL_INFO, "Outbox send success!");
+  APP_LOG(APP_LOG_LEVEL_INFO, "C: Outbox send success!");
 }
 
 // Face init code

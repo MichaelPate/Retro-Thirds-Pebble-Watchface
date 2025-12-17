@@ -119,6 +119,7 @@ Pebble.addEventListener('appmessage', function(e) {
   console.log('AppMessage received!');
 
   myAPIKey = e.payload[1];
+  //console.log(myAPIKey);
   // Get updated weather now
   getWeather();
 });
