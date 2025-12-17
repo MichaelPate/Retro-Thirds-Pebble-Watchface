@@ -39,6 +39,31 @@ typedef struct ClaySettings {
 
 static ClaySettings sClaySettings;
 
+static void prv_defaultSettings()
+{
+  sClaySettings.weatherTextColor = GColorBlack;
+  sClaySettings.timeTextColor = GColorBlack;
+  sClaySettings.dateTextColor = GColorBlack;
+  sClaySettings.topBackgroundColor = GColorVeryLightBlue;
+  sClaySettings.middleBackgroundColor = GColorMintGreen;
+  sClaySettings.bottomBackgroundColor = GColorRoseVale;
+  sClaySettings.weatherUpdateMinutes = 30;
+  strncpy(sClaySettings.owm_apiKey, "No API Key", sizeof(sClaySettings.owm_apiKey));
+}
+
+static void prv_loadSettings()
+{
+  prv_defaultSettings();
+  persist_read_data(CLAY_SETTINGS_KEY, &sClaySettings, sizeof(sClaySettings));
+}
+
+// Save a copy of the Clay settings in persistent storage for smoother operation
+// This way the settings dont have to be loaded from the phone every time
+static void prv_saveSettings()
+{
+  persist_write_data(CLAY_SETTINGS_KEY, &sClaySettings, sizeof(sClaySettings));
+}
+
 // Required to set background color of the top and bottom thirds
 static void topThirdBgColor_proc(Layer *layer, GContext *ctx)
 {
@@ -214,16 +239,11 @@ static void bt_handler(bool connected)
   updateBatteryAndBT();
 }
 
-// Save a copy of the Clay settings in persistent storage for smoother operation
-// This way the settings dont have to be loaded from the phone every time
-static void prv_saveSettings()
-{
-  persist_write_data(CLAY_SETTINGS_KEY, &sClaySettings, sizeof(sClaySettings));
-}
-
 // The below callbacks are part of the AppMessage system (how we get weather data from API)
 static void inbox_received_callback(DictionaryIterator *iterator, void *context)
 {
+  APP_LOG(APP_LOG_LEVEL_INFO, "Appmessage received in C code!");
+
   // Lets handle weather data first
   static char temperatureBuffer[8], temperatureMinBuffer[8], temperatureMaxBuffer[8];
   static char conditionsBuffer[32], conditionsDescBuffer[32];
@@ -289,6 +309,8 @@ static void inbox_received_callback(DictionaryIterator *iterator, void *context)
   }
 
   prv_saveSettings();
+
+  APP_LOG(APP_LOG_LEVEL_INFO, "Clay settings have been saved.");
 }
 
 static void inbox_dropped_callback(AppMessageResult reason, void *context)
@@ -347,6 +369,9 @@ static void init()
   app_message_register_inbox_dropped(inbox_dropped_callback);
   app_message_register_outbox_failed(outbox_failed_callback);
   app_message_register_outbox_sent(outbox_sent_callback);
+
+  // Load all our settings from Clay
+  prv_loadSettings();
 }
 
 // Face de-init code
