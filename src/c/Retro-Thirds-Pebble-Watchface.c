@@ -214,8 +214,14 @@ static void bt_handler(bool connected)
   updateBatteryAndBT();
 }
 
-// The below callbacks are part of the AppMessage system (how we get weather data from API)
+// Save a copy of the Clay settings in persistent storage for smoother operation
+// This way the settings dont have to be loaded from the phone every time
+static void prv_saveSettings()
+{
+  persist_write_data(CLAY_SETTINGS_KEY, &sClaySettings, sizeof(sClaySettings));
+}
 
+// The below callbacks are part of the AppMessage system (how we get weather data from API)
 static void inbox_received_callback(DictionaryIterator *iterator, void *context)
 {
   // Lets handle weather data first
@@ -266,13 +272,6 @@ static void outbox_sent_callback(DictionaryIterator *iterator, void *context)
   // Fun fact, this APP_LOG method can be used to print to the console as long as 
   // the install command has "--logs" included
   APP_LOG(APP_LOG_LEVEL_INFO, "Outbox send success!");
-}
-
-// Save a copy of the Clay settings in persistent storage for smoother operation
-// This way the settings dont have to be loaded from the phone every time
-static void prv_saveSettings()
-{
-  persist_write_data(CLAY_SETTINGS_KEY, &sClaySettings, sizeof(sClaySettings));
 }
 
 // Face init code

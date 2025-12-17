@@ -24,12 +24,15 @@ var xhrRequest = function (url, type, callback) {
 };
 
 // API key stored in secrets file so its not shown on github
+/**
 const secrets = require("./secrets.js");
 if (!secrets.OWM_KEY)
 {
   console.log("Missing OpenWeatherMap API key");
 }
 const myAPIKey = secrets.OWM_KEY;
+**/
+var myAPIKey;
 
 function locationSuccess(pos) {
   // Construct URL
@@ -105,6 +108,7 @@ Pebble.addEventListener('ready', function(e) {
 Pebble.addEventListener('appmessage', function(e) {
   console.log('AppMessage received!');
 
+  myAPIKey = e.payload[1];
   // Get updated weather now
   getWeather();
 });
