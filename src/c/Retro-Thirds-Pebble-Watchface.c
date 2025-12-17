@@ -15,22 +15,39 @@ static Layer *sBgTopLayer, *sBgBottomLayer; // no background for middle layer si
 #define top_y 54//PBL_IF_ROUND_ELSE(58, 52); // Need to go back
 //const int middle_size = PBL_IF_ROUND_ELSE(58, 52);
 #define bottom_y top_y + 58 // which y level will the layers be defined at
-static GColor bgTopColor, bgMiddleColor, bgBottomColor;
-static GColor weatherTextColor, timeTextColor, dateTextColor;
+
+//static GColor bgTopColor, bgMiddleColor, bgBottomColor;
+//static GColor weatherTextColor, timeTextColor, dateTextColor;
 
 static int sBatteryLevel;
 static bool sBTConnected;
-static int sWeatherUpdateMinutes;
+//static int sWeatherUpdateMinutes;
+//static char owm_apiKey[32];
+
+#define CLAY_SETTINGS_KEY 1
+
+typedef struct ClaySettings {
+  GColor weatherTextColor;
+  GColor timeTextColor;
+  GColor dateTextColor;
+  GColor topBackgroundColor;
+  GColor middleBackgroundColor;
+  GColor bottomBackgroundColor;
+  int weatherUpdateMinutes;
+  char owm_apiKey[32];
+} ClaySettings;
+
+static ClaySettings sClaySettings;
 
 // Required to set background color of the top and bottom thirds
 static void topThirdBgColor_proc(Layer *layer, GContext *ctx)
 {
-  graphics_context_set_fill_color(ctx, bgTopColor);
+  graphics_context_set_fill_color(ctx, sClaySettings.topBackgroundColor);
   graphics_fill_rect(ctx, layer_get_bounds(layer), 0, GCornerNone);
 }
 static void bottomThirdBgColor_proc(Layer *layer, GContext *ctx)
 {
-  graphics_context_set_fill_color(ctx, bgBottomColor);
+  graphics_context_set_fill_color(ctx, sClaySettings.bottomBackgroundColor);
   graphics_fill_rect(ctx, layer_get_bounds(layer), 0, GCornerNone);
 }
 
@@ -87,23 +104,18 @@ static void main_window_load(Window *window)
 
   // Create our background color layers and add them as well
   sBgTopLayer = layer_create(GRect(0, 0, windowBounds.size.w, top_y));
-  //bgTopColor = GColorVeryLightBlue;
-  bgTopColor = GColorVeryLightBlue;
   layer_set_update_proc(sBgTopLayer, topThirdBgColor_proc);
   layer_add_child(window_layer, sBgTopLayer);
 
   sBgBottomLayer = layer_create(GRect(0, bottom_y, windowBounds.size.w, windowBounds.size.h));
-  bgBottomColor = GColorRoseVale;
   layer_set_update_proc(sBgBottomLayer, bottomThirdBgColor_proc);
   layer_add_child(window_layer, sBgBottomLayer);
 
   // Create the time TextLayer with specific bounds (in its third of the screen) and colors
   sTimeTextLayer = text_layer_create(
       GRect(0, top_y, windowBounds.size.w, bottom_y - top_y));
-  bgMiddleColor = GColorMintGreen;
-  timeTextColor = GColorBlack;
-  text_layer_set_background_color(sTimeTextLayer, bgMiddleColor);
-  text_layer_set_text_color(sTimeTextLayer, timeTextColor);
+  text_layer_set_background_color(sTimeTextLayer, sClaySettings.middleBackgroundColor);
+  text_layer_set_text_color(sTimeTextLayer, sClaySettings.timeTextColor);
   text_layer_set_text(sTimeTextLayer, "00:00"); // Time text is set by updateTime, called by tick handler
   text_layer_set_font(sTimeTextLayer, sTimeFont);
   text_layer_set_text_alignment(sTimeTextLayer, GTextAlignmentCenter);
@@ -112,9 +124,8 @@ static void main_window_load(Window *window)
   // now we can setup our weather and date text layers
   sWeatherTextLayer = text_layer_create(
     GRect(0, 2, windowBounds.size.w, top_y/2));
-  weatherTextColor = GColorBlack;
   text_layer_set_background_color(sWeatherTextLayer, GColorClear);
-  text_layer_set_text_color(sWeatherTextLayer, weatherTextColor);
+  text_layer_set_text_color(sWeatherTextLayer, sClaySettings.weatherTextColor);
   text_layer_set_text(sWeatherTextLayer, "Weather");
   text_layer_set_font(sWeatherTextLayer, sTextFont);
   text_layer_set_text_alignment(sWeatherTextLayer, GTextAlignmentCenter);
@@ -123,7 +134,7 @@ static void main_window_load(Window *window)
   sTemperatureTextLayer = text_layer_create(
     GRect(0, (top_y/2) - 2, windowBounds.size.w, top_y/2));
   text_layer_set_background_color(sTemperatureTextLayer, GColorClear);
-  text_layer_set_text_color(sTemperatureTextLayer, weatherTextColor);
+  text_layer_set_text_color(sTemperatureTextLayer, sClaySettings.weatherTextColor);
   text_layer_set_text(sTemperatureTextLayer, "Temperature");
   text_layer_set_font(sTemperatureTextLayer, sTextFont);
   text_layer_set_text_alignment(sTemperatureTextLayer, GTextAlignmentCenter);
@@ -131,9 +142,8 @@ static void main_window_load(Window *window)
 
   sDayTextLayer = text_layer_create(
     GRect(0, bottom_y+4, windowBounds.size.w, bottom_y/2));
-  dateTextColor = GColorBlack;
   text_layer_set_background_color(sDayTextLayer, GColorClear);
-  text_layer_set_text_color(sDayTextLayer, dateTextColor);
+  text_layer_set_text_color(sDayTextLayer, sClaySettings.dateTextColor);
   text_layer_set_text(sDayTextLayer, "Date");
   text_layer_set_font(sDayTextLayer, sTextFont);
   text_layer_set_text_alignment(sDayTextLayer, GTextAlignmentCenter);
@@ -142,7 +152,7 @@ static void main_window_load(Window *window)
   sBattBtTextLayer = text_layer_create(
     GRect(0, (bottom_y) + (windowBounds.size.h - (bottom_y)) / 2, windowBounds.size.w, bottom_y/2));
   text_layer_set_background_color(sBattBtTextLayer, GColorClear);
-  text_layer_set_text_color(sBattBtTextLayer, dateTextColor);
+  text_layer_set_text_color(sBattBtTextLayer, sClaySettings.dateTextColor);
   text_layer_set_text(sBattBtTextLayer, "Battery");// NoBT");
   text_layer_set_font(sBattBtTextLayer, sTextFont);
   text_layer_set_text_alignment(sBattBtTextLayer, GTextAlignmentCenter);
@@ -175,13 +185,16 @@ static void tick_handler(struct tm *tick_time, TimeUnits units_changed)
 
   // And now the weahter
   // Get weather update every 30 minutes
-  if (tick_time->tm_min % sWeatherUpdateMinutes == 0) {
+  if (tick_time->tm_min % sClaySettings.weatherUpdateMinutes == 0) {
     // Begin dictionary
     DictionaryIterator *iter;
     app_message_outbox_begin(&iter);
 
     // Add a key-value pair
-    dict_write_uint8(iter, 0, 0);
+    //dict_write_uint8(iter, 0, 0);
+    // Instead of an empty dict we will include the API key, which came from Clay
+    // which came from the app's settings page (no longer baked in)
+    dict_write_cstring(iter, 1, sClaySettings.owm_apiKey);
 
     // Send the message!
     app_message_outbox_send();
@@ -234,7 +247,8 @@ static void inbox_received_callback(DictionaryIterator *iterator, void *context)
 
 
   // Now lets handle the data from Clay
-  
+
+  prv_saveSettings();
 }
 
 static void inbox_dropped_callback(AppMessageResult reason, void *context)
@@ -252,6 +266,13 @@ static void outbox_sent_callback(DictionaryIterator *iterator, void *context)
   // Fun fact, this APP_LOG method can be used to print to the console as long as 
   // the install command has "--logs" included
   APP_LOG(APP_LOG_LEVEL_INFO, "Outbox send success!");
+}
+
+// Save a copy of the Clay settings in persistent storage for smoother operation
+// This way the settings dont have to be loaded from the phone every time
+static void prv_saveSettings()
+{
+  persist_write_data(CLAY_SETTINGS_KEY, &sClaySettings, sizeof(sClaySettings));
 }
 
 // Face init code
@@ -293,8 +314,6 @@ static void init()
   app_message_register_inbox_dropped(inbox_dropped_callback);
   app_message_register_outbox_failed(outbox_failed_callback);
   app_message_register_outbox_sent(outbox_sent_callback);
-
-  sWeatherUpdateMinutes = 30; // default to 30 minutes for the weather update
 }
 
 // Face de-init code
