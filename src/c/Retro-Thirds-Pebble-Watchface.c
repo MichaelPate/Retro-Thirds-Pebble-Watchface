@@ -253,6 +253,40 @@ static void inbox_received_callback(DictionaryIterator *iterator, void *context)
 
 
   // Now lets handle the data from Clay
+  Tuple *tBgColorTop = dict_find(iterator, MESSAGE_KEY_topBackgroundColor);
+  if (tBgColorTop) {
+    sClaySettings.topBackgroundColor = GColorFromHEX(tBgColorTop->value->int32);
+  }
+
+  Tuple *tBgColorMiddle = dict_find(iterator, MESSAGE_KEY_middleBackgroundColor);
+  if (tBgColorMiddle) {
+    sClaySettings.middleBackgroundColor = GColorFromHEX(tBgColorMiddle->value->int32);
+  }
+
+  Tuple *tBgColorBottom = dict_find(iterator, MESSAGE_KEY_bottomBackgroundColor);
+  if (tBgColorBottom) {
+    sClaySettings.bottomBackgroundColor = GColorFromHEX(tBgColorBottom->value->int32);
+  }
+
+  Tuple *tWeatherColor = dict_find(iterator, MESSAGE_KEY_weatherTextColor);
+  if (tWeatherColor) {
+    sClaySettings.weatherTextColor = GColorFromHEX(tWeatherColor->value->int32);
+  }
+
+  Tuple *tTimeColor = dict_find(iterator, MESSAGE_KEY_timeTextColor);
+  if (tTimeColor) {
+    sClaySettings.timeTextColor = GColorFromHEX(tTimeColor->value->int32);
+  }
+
+  Tuple *tDateColor = dict_find(iterator, MESSAGE_KEY_dateTextColor);
+  if (tDateColor) {
+    sClaySettings.dateTextColor = GColorFromHEX(tDateColor->value->int32);
+  }
+
+  Tuple *tWeatherMinutes = dict_find(iterator, MESSAGE_KEY_weatherUpdateFrequencyMinutes);
+  if (tWeatherMinutes) {
+    sClaySettings.weatherUpdateMinutes = (int)tWeatherMinutes->value->int32;
+  }
 
   prv_saveSettings();
 }
