@@ -255,11 +255,31 @@ static void inbox_received_callback(DictionaryIterator *iterator, void *context)
   Tuple *conditions_tuple = dict_find(iterator, MESSAGE_KEY_CONDITIONS);
   Tuple *conditionsDesc_tuple = dict_find(iterator, MESSAGE_KEY_CONDITIONSDESC);
 
-  snprintf(temperatureBuffer, sizeof(temperatureBuffer), "%d", (int)temp_tuple->value->int32);
-  snprintf(temperatureMinBuffer, sizeof(temperatureMinBuffer), "%d", (int)tempMin_tuple->value->int32);
-  snprintf(temperatureMaxBuffer, sizeof(temperatureMaxBuffer), "%d", (int)tempMax_tuple->value->int32);
-  snprintf(conditionsBuffer, sizeof(conditionsBuffer), "%s", conditions_tuple->value->cstring);
-  snprintf(conditionsDescBuffer, sizeof(conditionsDescBuffer), "%s", conditionsDesc_tuple->value->cstring);
+  if (temp_tuple)
+  {
+    snprintf(temperatureBuffer, sizeof(temperatureBuffer), "%d", (int)temp_tuple->value->int32);
+  }
+
+  if (tempMin_tuple)
+  {
+    snprintf(temperatureMinBuffer, sizeof(temperatureMinBuffer), "%d", (int)tempMin_tuple->value->int32);
+  }
+  
+  if (tempMax_tuple)
+  {
+    snprintf(temperatureMaxBuffer, sizeof(temperatureMaxBuffer), "%d", (int)tempMax_tuple->value->int32);
+  }
+  
+  if (conditions_tuple)
+  {
+    snprintf(conditionsBuffer, sizeof(conditionsBuffer), "%s", conditions_tuple->value->cstring);
+  }
+  
+  if (conditionsDesc_tuple)
+  {
+    snprintf(conditionsDescBuffer, sizeof(conditionsDescBuffer), "%s", conditionsDesc_tuple->value->cstring);
+  }
+  
 
   // Assemble full string and display
   snprintf(weatherStringBuffer, sizeof(weatherStringBuffer), "%s", conditionsBuffer);
@@ -274,37 +294,44 @@ static void inbox_received_callback(DictionaryIterator *iterator, void *context)
 
   // Now lets handle the data from Clay
   Tuple *tBgColorTop = dict_find(iterator, MESSAGE_KEY_topBackgroundColor);
-  if (tBgColorTop) {
+  if (tBgColorTop)
+  {
     sClaySettings.topBackgroundColor = GColorFromHEX(tBgColorTop->value->int32);
   }
 
   Tuple *tBgColorMiddle = dict_find(iterator, MESSAGE_KEY_middleBackgroundColor);
-  if (tBgColorMiddle) {
+  if (tBgColorMiddle)
+  {
     sClaySettings.middleBackgroundColor = GColorFromHEX(tBgColorMiddle->value->int32);
   }
 
   Tuple *tBgColorBottom = dict_find(iterator, MESSAGE_KEY_bottomBackgroundColor);
-  if (tBgColorBottom) {
+  if (tBgColorBottom)
+  {
     sClaySettings.bottomBackgroundColor = GColorFromHEX(tBgColorBottom->value->int32);
   }
 
   Tuple *tWeatherColor = dict_find(iterator, MESSAGE_KEY_weatherTextColor);
-  if (tWeatherColor) {
+  if (tWeatherColor)
+  {
     sClaySettings.weatherTextColor = GColorFromHEX(tWeatherColor->value->int32);
   }
 
   Tuple *tTimeColor = dict_find(iterator, MESSAGE_KEY_timeTextColor);
-  if (tTimeColor) {
+  if (tTimeColor)
+  {
     sClaySettings.timeTextColor = GColorFromHEX(tTimeColor->value->int32);
   }
 
   Tuple *tDateColor = dict_find(iterator, MESSAGE_KEY_dateTextColor);
-  if (tDateColor) {
+  if (tDateColor)
+  {
     sClaySettings.dateTextColor = GColorFromHEX(tDateColor->value->int32);
   }
 
   Tuple *tWeatherMinutes = dict_find(iterator, MESSAGE_KEY_weatherUpdateFrequencyMinutes);
-  if (tWeatherMinutes) {
+  if (tWeatherMinutes)
+  {
     sClaySettings.weatherUpdateMinutes = (int)tWeatherMinutes->value->int32;
   }
 
