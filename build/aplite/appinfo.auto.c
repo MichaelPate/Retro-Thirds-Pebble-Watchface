@@ -10,7 +10,7 @@ const PebbleProcessInfo __pbl_app_info __attribute__ ((section (".pbl_header")))
   .offset = 0xb6b6b6b6,
   .crc = 0xb6b6b6b6,
   .name = "Retro-Thirds-Pebble-Watchface",
-  .company = "MakeAwesomeHappen",
+  .company = "Michael Pate 12/2025",
   .icon_resource_id = DEFAULT_MENU_ICON,
   .sym_table_addr = 0xA7A7A7A7,
   .flags = PROCESS_INFO_WATCH_FACE | PROCESS_INFO_PLATFORM_APLITE,

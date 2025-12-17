@@ -11,8 +11,8 @@
         "emery"
     ],
     "capabilities": [
-        "configurable",
-        "location"
+        "location",
+        "configurable"
     ],
     "watchapp": {
         "watchface": true
@@ -58,7 +58,7 @@
     "shortName": "Retro-Thirds-Pebble-Watchface",
     "longName": "Retro-Thirds-Pebble-Watchface",
     "versionLabel": "1.0",
-    "companyName": "MakeAwesomeHappen",
+    "companyName": "Michael Pate 12/2025",
     "appKeys": {
         "topBackgroundColor": 10000,
         "middleBackgroundColor": 10001,
