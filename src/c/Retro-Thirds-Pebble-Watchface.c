@@ -20,6 +20,7 @@ static GColor weatherTextColor, timeTextColor, dateTextColor;
 
 static int sBatteryLevel;
 static bool sBTConnected;
+static int sWeatherUpdateMinutes;
 
 // Required to set background color of the top and bottom thirds
 static void topThirdBgColor_proc(Layer *layer, GContext *ctx)
@@ -174,7 +175,7 @@ static void tick_handler(struct tm *tick_time, TimeUnits units_changed)
 
   // And now the weahter
   // Get weather update every 30 minutes
-  if (tick_time->tm_min % 30 == 0) {
+  if (tick_time->tm_min % sWeatherUpdateMinutes == 0) {
     // Begin dictionary
     DictionaryIterator *iter;
     app_message_outbox_begin(&iter);
@@ -204,6 +205,7 @@ static void bt_handler(bool connected)
 
 static void inbox_received_callback(DictionaryIterator *iterator, void *context)
 {
+  // Lets handle weather data first
   static char temperatureBuffer[8], temperatureMinBuffer[8], temperatureMaxBuffer[8];
   static char conditionsBuffer[32], conditionsDescBuffer[32];
   static char weatherStringBuffer[32], temperatureStringBuffer[32]; // these strings will go into the text layers' texts
@@ -230,6 +232,9 @@ static void inbox_received_callback(DictionaryIterator *iterator, void *context)
 
   APP_LOG(APP_LOG_LEVEL_INFO, "The weather has updated!");
 
+
+  // Now lets handle the data from Clay
+  
 }
 
 static void inbox_dropped_callback(AppMessageResult reason, void *context)
@@ -288,6 +293,8 @@ static void init()
   app_message_register_inbox_dropped(inbox_dropped_callback);
   app_message_register_outbox_failed(outbox_failed_callback);
   app_message_register_outbox_sent(outbox_sent_callback);
+
+  sWeatherUpdateMinutes = 30; // default to 30 minutes for the weather update
 }
 
 // Face de-init code

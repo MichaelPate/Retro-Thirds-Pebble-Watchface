@@ -1,7 +1,15 @@
 {
-    "CONDITIONS": 10003,
-    "CONDITIONSDESC": 10004,
-    "TEMPERATURE": 10000,
-    "TEMPERATUREMAX": 10001,
-    "TEMPERATUREMIN": 10002
+    "CONDITIONS": 10011,
+    "CONDITIONSDESC": 10012,
+    "TEMPERATURE": 10008,
+    "TEMPERATUREMAX": 10009,
+    "TEMPERATUREMIN": 10010,
+    "bottomBackgroundColor": 10002,
+    "dateTextColor": 10005,
+    "middleBackgroundColor": 10001,
+    "timeTextColor": 10004,
+    "topBackgroundColor": 10000,
+    "weatherTextColor": 10003,
+    "weatherUpdateFrequencyMinutes": 10007,
+    "weathermapAPIkey": 10006
 }

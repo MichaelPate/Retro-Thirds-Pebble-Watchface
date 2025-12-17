@@ -6,12 +6,10 @@
     "pebble-app"
   ],
   "capabilities": [
-    "location"
+    "location",
+    "configurable"
   ],
   "private": true,
-  "dependencies": {
-    "pebble-clay": "^1.0.4"
-  },
   "pebble": {
     "displayName": "Retro-Thirds-Pebble-Watchface",
     "uuid": "b6d801c7-83d0-47d3-bff1-b5c7fa907559",
@@ -22,8 +20,7 @@
       "basalt",
       "chalk",
       "diorite",
-      "emery",
-      "flint"
+      "emery"
     ],
     "capabilities": [
       "location",
@@ -69,5 +66,8 @@
         }
       ]
     }
+  },
+  "dependencies": {
+    "pebble-clay": "^1.0.4"
   }
 }

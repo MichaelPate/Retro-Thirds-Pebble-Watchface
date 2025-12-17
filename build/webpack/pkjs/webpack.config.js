@@ -21,7 +21,8 @@ const resolveRoots = ["/home/michaelp/.pebble-sdk/SDKs/current/sdk-core/pebble/c
 "/mnt/Babel/Documents/Projects/Pebble/Retro-Thirds-Pebble-Watchface/build/js"];
 
 // Object, { alias1: 'path1', ... }
-const resolveAliases = {"app_package.json": "/mnt/Babel/Documents/Projects/Pebble/Retro-Thirds-Pebble-Watchface/package.json"};
+const resolveAliases = {"pebble-clay": "pebble-clay/dist/js",
+"app_package.json": "/mnt/Babel/Documents/Projects/Pebble/Retro-Thirds-Pebble-Watchface/package.json"};
 
 // null or Object with key 'sourceMapFilename'
 const sourceMapConfig = {"sourceMapFilename": "pebble-js-app.js.map"};

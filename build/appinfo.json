@@ -8,21 +8,29 @@
         "basalt",
         "chalk",
         "diorite",
-        "emery",
-        "flint"
+        "emery"
     ],
     "capabilities": [
+        "configurable",
         "location"
     ],
     "watchapp": {
         "watchface": true
     },
     "messageKeys": {
-        "TEMPERATURE": 10000,
-        "TEMPERATUREMAX": 10001,
-        "TEMPERATUREMIN": 10002,
-        "CONDITIONS": 10003,
-        "CONDITIONSDESC": 10004
+        "topBackgroundColor": 10000,
+        "middleBackgroundColor": 10001,
+        "bottomBackgroundColor": 10002,
+        "weatherTextColor": 10003,
+        "timeTextColor": 10004,
+        "dateTextColor": 10005,
+        "weathermapAPIkey": 10006,
+        "weatherUpdateFrequencyMinutes": 10007,
+        "TEMPERATURE": 10008,
+        "TEMPERATUREMAX": 10009,
+        "TEMPERATUREMIN": 10010,
+        "CONDITIONS": 10011,
+        "CONDITIONSDESC": 10012
     },
     "resources": {
         "media": [
@@ -52,10 +60,18 @@
     "versionLabel": "1.0",
     "companyName": "MakeAwesomeHappen",
     "appKeys": {
-        "TEMPERATURE": 10000,
-        "TEMPERATUREMAX": 10001,
-        "TEMPERATUREMIN": 10002,
-        "CONDITIONS": 10003,
-        "CONDITIONSDESC": 10004
+        "topBackgroundColor": 10000,
+        "middleBackgroundColor": 10001,
+        "bottomBackgroundColor": 10002,
+        "weatherTextColor": 10003,
+        "timeTextColor": 10004,
+        "dateTextColor": 10005,
+        "weathermapAPIkey": 10006,
+        "weatherUpdateFrequencyMinutes": 10007,
+        "TEMPERATURE": 10008,
+        "TEMPERATUREMAX": 10009,
+        "TEMPERATUREMIN": 10010,
+        "CONDITIONS": 10011,
+        "CONDITIONSDESC": 10012
     }
 }
