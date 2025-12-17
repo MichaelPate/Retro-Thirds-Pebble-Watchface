@@ -57,12 +57,25 @@ static void prv_loadSettings()
   persist_read_data(CLAY_SETTINGS_KEY, &sClaySettings, sizeof(sClaySettings));
 }
 
+static void prv_updateDisplay()
+{
+  text_layer_set_background_color(sTimeTextLayer, sClaySettings.middleBackgroundColor);
+  text_layer_set_text_color(sTimeTextLayer, sClaySettings.timeTextColor);
+  text_layer_set_text_color(sWeatherTextLayer, sClaySettings.weatherTextColor);
+  text_layer_set_text_color(sTemperatureTextLayer, sClaySettings.weatherTextColor);
+  text_layer_set_text_color(sDayTextLayer, sClaySettings.dateTextColor);
+  text_layer_set_text_color(sBattBtTextLayer, sClaySettings.dateTextColor);
+}
+
 // Save a copy of the Clay settings in persistent storage for smoother operation
 // This way the settings dont have to be loaded from the phone every time
 static void prv_saveSettings()
 {
   persist_write_data(CLAY_SETTINGS_KEY, &sClaySettings, sizeof(sClaySettings));
+  prv_updateDisplay();
 }
+
+
 
 // Required to set background color of the top and bottom thirds
 static void topThirdBgColor_proc(Layer *layer, GContext *ctx)
