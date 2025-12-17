@@ -23,6 +23,16 @@ var xhrRequest = function (url, type, callback) {
   xhr.send();
 };
 
+// We are using clay to setup the page for changing settings
+// like color
+// See https://developer.repebble.com/guides/user-interfaces/app-configuration/
+// Import the Clay package
+var Clay = require('pebble-clay');
+// Load our Clay configuration file
+var clayConfig = require('./config');
+// Initialize Clay
+var clay = new Clay(clayConfig);
+
 // API key stored in secrets file so its not shown on github
 /**
 const secrets = require("./secrets.js");
@@ -112,13 +122,3 @@ Pebble.addEventListener('appmessage', function(e) {
   // Get updated weather now
   getWeather();
 });
-
-// We are using clay to setup the page for changing settings
-// like color
-// See https://developer.repebble.com/guides/user-interfaces/app-configuration/
-// Import the Clay package
-var Clay = require('pebble-clay');
-// Load our Clay configuration file
-var clayConfig = require('./config');
-// Initialize Clay
-var clay = new Clay(clayConfig);

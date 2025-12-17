@@ -1,6 +1,4 @@
-{
-  "type": "section",
-  "items": [
+module.exports = [
       {
         "type": "heading",
         "defaultValue": "App Configuration"
@@ -84,4 +82,3 @@
         "defaultValue": "Made by Michael Pate, 12/2025"
       }
   ]
-}
